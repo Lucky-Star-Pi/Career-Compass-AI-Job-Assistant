@@ -5,9 +5,10 @@ import json
 import re
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
+DENIED_QUERY_NAMES = frozenset('token access_token key api_key apikey secret session auth sign signature password pwd ticket'.split())
 OPTIONAL = 'batch location organization_type announcement_url application_url last_verified_at published_at application_start application_end education degree major graduation_time experience political_status certificates age other_restrictions profile_version'.split()
 REQUIRED = set(OPTIONAL + 'id name employer source_url obtained_at conditions condition_text standardized_values logical_relationships human_verification open_status raw_snapshot evidence_hash evidence_excerpt evidence_metadata source_refs missing_fields conflicts status evaluations profile_confirmed is_fixture'.split())
 
@@ -41,11 +42,15 @@ def validate_record(row, root=ROOT, allow_fixtures=False):
         errors.append('record requires contact/identifier redaction')
     if not allow_fixtures and (row.get('is_fixture') is not False or 'fixtures/' in serialized.replace('\\', '/') or '虚构' in serialized or row.get('evidence_hash') in fixture_hashes):
         errors.append('fixtures contamination or missing real-data marker')
-    u = urlsplit(row.get('source_url', '') if isinstance(row.get('source_url'), str) else '')
-    if u.scheme not in ('http', 'https') or not u.hostname or u.username or u.password or u.query or u.fragment:
-        errors.append('invalid source_url (no credential/query/fragment allowed)')
-    elif not allow_fixtures and u.hostname not in ('zhidianmijin.com.cn', 'www.zhidianmijin.com.cn'):
-        errors.append('source_url must identify actual zhidianmijin source')
+    try:
+        u = urlsplit(row.get('source_url', '') if isinstance(row.get('source_url'), str) else '')
+        denied_query = any(name.casefold() in DENIED_QUERY_NAMES for name, _ in parse_qsl(u.query, keep_blank_values=True))
+        if u.scheme not in ('http', 'https') or not u.hostname or u.username is not None or u.password is not None or u.fragment or denied_query:
+            errors.append('invalid source_url (embedded credentials, fragment or denied query name)')
+        elif not allow_fixtures and u.hostname not in ('zhidianmijin.com.cn', 'www.zhidianmijin.com.cn'):
+            errors.append('source_url must identify actual zhidianmijin source')
+    except ValueError:
+        errors.append('invalid source_url (malformed URL)')
     if not timestamp(row.get('obtained_at')):
         errors.append('obtained_at must be ISO8601 with explicit +08:00')
     if row.get('last_verified_at', 'unknown') != 'unknown' and not timestamp(row.get('last_verified_at')):

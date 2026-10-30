@@ -8,7 +8,7 @@
 |---|---|---|
 | id | 必填，内部稳定字符串 | 人工ID或组合键哈希，不假定来源ID |
 | name, employer, batch, location, organization_type | name/employer必填，其他选填 | 缺失unknown；单位性质需依据 |
-| source_url | 必填，职点迷津公开http(s) URL | 不带凭据/敏感查询参数，来源不能虚构 |
+| source_url | 必填，职点迷津公开http(s) URL | 允许普通查询参数（如id、jobId、from、utm_*）；禁止fragment和URL内嵌用户名密码；查询参数名经URL解码后按大小写不敏感拒绝token、access_token、key、api_key、apikey、secret、session、auth、sign、signature、password、pwd、ticket；来源不能虚构 |
 | announcement_url, application_url | 选填URL | 无原始公告或报名入口=unknown |
 | obtained_at, last_verified_at | 前者必填ISO8601显式+08:00，后者选填同格式 | 核验与获取不同，未核验unknown |
 | published_at, application_start, application_end | 选填对象或unknown | 对象含raw/normalized/precision/timezone；仅日期不补具体时刻 |
