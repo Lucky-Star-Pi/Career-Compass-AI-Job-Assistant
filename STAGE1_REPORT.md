@@ -1,0 +1,60 @@
+# 阶段一报告
+
+日期：2026-10-30，Asia/Shanghai。范围：仓库、记录、冻结选型、数据权限与契约、离线导入闸门、后续计划。没有初始化应用、安装依赖、编写聊天/简历/推荐业务，也没有岗位自动采集、数据库创建或模型计费调用。
+
+## 产出与提交
+
+| 卡 | 文件/证据 | 提交 | 验收结论 |
+|---|---|---|---|
+| A1 | .gitignore、README.md、AGENTS.md、记录目录；origin | 1de9e73 | 本地提交存在，保留远端Initial commit 7313e75 |
+| B01 | agent-records/、TIMELOG.csv、scripts/capture_record.py | 499b5e4 | 原生快照重开153行且哈希一致；本地隔离，交付隐私审查未完成；manual原文未提供 |
+| B02及冻结单 | DECISIONS.md、DATA_SCOPE.md、DATA_CHECKLIST.md、ENV_CHECKLIST.md、data/CONTRACT.md、GIT_POLICY.md、COLLECTION_ORDER.md | 76e8f97 | 六类权限均有结论与依据；官方价格已查；账户与三项实测要求未全部完成 |
+| B03 | scripts/import_data.py、validate_data.py、test_data_pipeline.py；data/fixtures/、REPORT.md | 774553c | 离线骨架通过；真实获取与核验未完成，真实0条 |
+| B04预备 | PLAN.md | 007b903 | 瘦切片、三个止损点、B16两小时缓冲均已列明 |
+| 阶段收尾 | 本报告、记录关联、实际耗时 | 以Git历史中对应收尾提交定位 | 不在文件内伪填自身提交SHA；后续审计提交登记前卡SHA |
+
+## 已确认事实与实测依据
+
+1. 本地init完成，origin为用户指定GitHub仓库。无代理ls-remote返回main=7313e75，pull保留该历史；仓库不是空远端。用户已在本聊天明确允许首次push并在场完成GCM；本报告初稿时尚未push，最终结果在下节记录。
+2. 原生源位于宿主会话目录，按本次thread ID匹配；复制完整行字节前缀，不改写。两份快照重开且SHA256一致，第二份331行；索引和native-manifest登记哈希。文件仅本地，不随公开Git推送。真实CLI版本不从该宿主记录推断。
+3. /terms无代理HTTP 200；阅读第二节2.1、第四节4.1.19和第五节。未发现明确禁止展示/再分发措辞，权属声明保留为人工判断风险；不把该结果当站点授权。无整页HTML入库。
+4. /robots.txt无代理HTTP 200：User-agent:*，Allow:/，Disallow:/api/。不解除自动化G5门禁，不访问/api/。
+5. 数据六类：访问、人工获取、保存、展示、提交按参赛者书面授权允许；自动化按更具体A3/G5待确认、默认人工。
+6. DeepSeek官方公告表明冻结的deepseek-chat已退役；官方公开价格和出处写入DECISIONS。采用已指定Qwen备选路径，不擅自换新模型ID；账户是否可用仍未知。
+7. `python scripts/import_data.py --input data/fixtures/input.json --fixture` exit=0：input=1/output=1/failed=0/eligible=0，仅虚构样例。
+8. `python scripts/test_data_pipeline.py` exit=0：六个必需字段缺失的子进程各exit=1；样例污染子进程exit=1；哈希不符、冲突队列、失败留存、三态基础约束通过。
+9. `python scripts/validate_data.py` exit=0，实际输出：`PASS: production records=0; NO REAL DATA / eligibility not proven`。空数据通过不是推荐或真实数据验收通过。
+
+## 仍待确认与未完成
+
+### 阻塞相关下一步的项目
+
+- **真实材料缺失**：CO-001已发出，尚无人工采集材料；B03真实数据验收未完成，不能用fixtures演示为真实推荐。阻塞真实B05/B06验收，不阻塞离线骨架。
+- **账户与授权**：Vercel、Neon、模型余额和有效期未验证。注册、登录、费用操作由本人完成；不索取Key，不无授权发计费请求。
+- **模型ID失效**：主ID不可当作可用账户前提；需核验已冻结Qwen备选，若要更换DeepSeek ID需另行变更记录。
+- **隐私交付审查**：本地native含完整上下文，尚不能认定可公开交付；不直接加入Git。审查/脱敏副本不能冒充原样native。
+
+### 保守默认继续的项目
+
+- 自动化待确认：仅人工工单，无采集脚本。
+- 未读到明确条款禁令，不自行替人工作最终判断；发现明文冲突立刻触发G3。
+- 手机4G hello-world未实测、中文路径Next build未实测、模型账户额度未实测；ENV_CHECKLIST如实保留。构建测试因本阶段禁止框架/依赖而后移。
+- manual-paste原文未提供，不创建伪原文。第一快照后缺失区间由第二快照部分覆盖；第二快照后的工具/回复不在该快照内。
+- HTTP证据不可观测时unknown；状态unknown不展示为可报名。隐私正则不是完整隐私保证，仍需人工审查。
+
+## 对24小时计划的影响
+
+- TIMELOG按实际+08:00观测记录；人工投入和agent等待未测量，不填推测值。阶段墙钟明显小于2.5h，不能将墙钟直接冒称净agent工时或人力投入。
+- 没有真实数据、账户、4G/build验证，前置不确定性只部分消除；不能宣称已具备完整上线条件。
+- 先补B05实际材料与核验，同时可做已授权下一阶段的原B04骨架。先瘦切片、早部署，后上传/删除与完整展示；本轮止于阶段一。
+- PLAN明确12h/18h/22h止损；未完成的P0保持未完成并披露；18–20h留B16修复，不新加功能。
+
+## 下一阶段入口（B05起）
+
+1. 参赛者按CO-001提交最多10条允许保存的脱敏岗位材料和采集台账。
+2. 导入→生产闸门→逐条人工核验；补充细化实际字段/专业与年龄等逻辑，不猜测。
+3. 验证Vercel免费账户、Neon、Qwen额度；下一阶段框架建立后测中文路径build及4G公网。凭据仅本人配置服务端环境，不进仓库或记录。
+
+## 远端交付结果
+
+待执行首次push；若GCM、代理或访问限制阻塞，保留本地提交并如实记录，不处理凭据或修改系统设置。
