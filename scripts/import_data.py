@@ -4,6 +4,7 @@ import hashlib
 import json
 from csv_records import read_csv
 from pathlib import Path
+from copy import deepcopy
 from validate_data import ROOT, OPTIONAL, safe_path, validate_record
 
 
@@ -38,7 +39,7 @@ def normalize(source, fixture):
     row['status'] = 'unknown'
     row['missing_fields'] = sorted(set(source.get('missing_fields', [])) | {k for k in OPTIONAL if row[k] == 'unknown'})
     row['evidence_metadata'] = {'url': row['source_url'], 'obtained_at': row['obtained_at'], 'http_status': 'unknown', 'screenshot_path': 'unknown'} | source.get('evidence_metadata', {})
-    row['source_refs'] = [{'source_url': row['source_url'], 'obtained_at': row['obtained_at'], 'raw_snapshot': row['raw_snapshot'], 'evidence_hash': row['evidence_hash']}]
+    row['source_refs'] = deepcopy(source['source_refs']) if 'source_refs' in source else [{'source_url': row['source_url'], 'obtained_at': row['obtained_at'], 'raw_snapshot': row['raw_snapshot'], 'evidence_hash': row['evidence_hash']}]
     problems = validate_record(row, ROOT, fixture)
     if problems:
         raise ValueError('; '.join(problems))
