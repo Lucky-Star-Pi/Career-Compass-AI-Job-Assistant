@@ -77,3 +77,34 @@ def apply_layout(row, text):
     if output.get('备注') == 'PENDING':
         output['备注'] = ''
     return output, parsed
+
+
+def quality_fields(row, text):
+    """Night A: exact qualification slice and first actual qualification value, never UI."""
+    output, parsed = apply_layout(row, text)
+    lines = text.splitlines()
+    labels = [i for i, line in enumerate(lines) if line.strip() in ('学历要求', '专业要求', '学历', '专业')]
+    if labels:
+        start = min(labels)
+        end = next((i for i in range(start + 1, len(lines)) if lines[i].strip().startswith('选好学历和专业') or lines[i].strip() in ('在列表里为这个岗位选条件', '岗位介绍')), len(lines))
+        output['条件原文'] = '\n'.join(lines[start:end]).strip()
+    for field in ('education', 'major'):
+        if parsed.get(field) not in (None, '', 'unknown'):
+            output['证据引用'] = parsed[field]
+            break
+    else:
+        intro = next((i + 1 for i, line in enumerate(lines) if line.strip() == '岗位介绍'), len(lines))
+        body = '\n'.join(lines[intro:]).strip()
+        output['证据引用'] = re.split(r'(?<=[。；;！？])', body)[0].strip() or 'PENDING'
+    header = next((line.split('：', 1)[1] for line in lines[:4] if line.startswith('# 公告URL：')), None)
+    if header == 'unknown':
+        output['公告URL'] = 'unknown'
+    if not any(re.match(r'^(工作经验|经验要求)(?:[：:]|$)', line.strip()) for line in lines):
+        output['工作经验'] = 'unknown'
+    if output.get('证书') == 'PENDING':
+        matches = list(re.finditer(r'(?:大学英语)?CET[-－]4[^。\n]*。?|持有C1[^。\n]*驾驶证。?', text))
+        output['证书'] = text[min(m.start() for m in matches):max(m.end() for m in matches)] if matches else 'unknown'
+    for field in ('条件原文', '证据引用'):
+        if output[field] not in text or any(ui in output[field] for ui in ('选好学历和专业', '在列表里为这个岗位选条件')):
+            raise ValueError('QualificationEvidenceMismatch')
+    return output

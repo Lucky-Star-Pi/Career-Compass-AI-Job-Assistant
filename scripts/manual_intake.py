@@ -152,7 +152,7 @@ def check_row(raw, root, collected=False):
                 errors.append(key + '未在证据TXT逐字命中')
         expected_headers = [f'# 岗位名称：{row["岗位名称"]}', f'# 详情页URL：{row["详情页URL"]}', '# 公告URL：' + ('unknown' if unknown(row['公告URL']) else row['公告URL']), f'# 采集时间：{row["采集时间"]}']
         collected_headers = [f'# 岗位名：{row["岗位名称"]}', f'# URL：{row["详情页URL"]}', f'# 获取时间：{row["采集时间"]}', '# 公告URL：' + ('unknown' if unknown(row['公告URL']) else row['公告URL'])]
-        if text.splitlines()[:4] != expected_headers and not (collected and text.splitlines()[:4] == collected_headers):
+        if text.splitlines()[:4] not in (expected_headers, collected_headers):
             errors.append('证据TXT四行头部须与CSV一致')
     if errors:
         return None, errors, path
