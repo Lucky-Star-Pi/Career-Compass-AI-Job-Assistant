@@ -21,3 +21,6 @@ B04 预备提交：007b903。
 | raw/native/20261030-191705-CLOSURE.jsonl（本地隔离） | 阶段报告/首次push | 2026-10-30T19:17:05+08:00 | 64f7996 | 0e747acb504c0491a993035067be109eac21d5b1119200fde1afecb9438f80a9 | native-byte-prefix-copy |
 
 阶段报告提交64f7996；首次push成功。CLOSURE后审计及最终回复未包含，不以摘要补造。最后审计提交本身可由Git历史定位。
+
+
+MODEL-CHANGE (2026-10-30): agent-records/raw/native/20261030-192543-MODEL-CHANGE.jsonl | 2026-10-30T19:25:43+08:00 | SHA256 342d5822d32ab565dfb7e4bd35307b124b584c67affe5c624b3f632aa415cdc7 | native-byte-prefix-copy | commit: see Git model-change commit; local only, privacy review pending.

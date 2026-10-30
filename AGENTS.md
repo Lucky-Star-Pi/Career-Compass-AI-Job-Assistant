@@ -1,6 +1,6 @@
 # 执行约定
 
-- 冻结：Next.js 15 App Router / TypeScript / Tailwind；Neon PostgreSQL；DeepSeek deepseek-chat 主，DashScope qwen-plus 备、qwen-turbo 轻任务；Vercel Hobby + Git。
+- 冻结：Next.js 15 App Router / TypeScript / Tailwind；Neon PostgreSQL；DeepSeek-V4.1-Flash-1017 主（API ID：deepseek-flash），DashScope qwen-plus 备、qwen-turbo 轻任务；Vercel Hobby + Git。主模型变更依据参赛者2026-10-30追加指令，不再使用deepseek-chat。
 - 不用向量库、微服务、多代理编排、OCR。本阶段不初始化框架、不安装依赖、不写业务应用。脚本仅 Python 标准库。
 - 数据权限依据参赛者 2026-10-30 书面授权；自动化按 A3/G5 待确认、默认人工。若站点条款与展示/再分发授权冲突，立即停下报告。
 - 公开仓库仅可含结构化岗位数据及脱敏证据片段，不含整页 HTML 或个人联系方式。未知不等于不限，冲突入人工复核队列。
