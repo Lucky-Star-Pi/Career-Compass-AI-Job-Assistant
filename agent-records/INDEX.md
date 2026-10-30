@@ -54,4 +54,4 @@ MODEL-CHANGE (2026-10-30): agent-records/raw/native/20261030-192543-MODEL-CHANGE
 
 ## B05-I 布局A/B离线修复
 
-10份证据SHA256与H原网络台账一致；旧auto/FILL_ME/run完整保留.v1。新run模式reparse、requests=0；10条国企原文定位、1具体截止2027-01-25、9显式长期招聘、学历10有值、FILL_ME剩1个PENDING。只读合并通过9/拒绝1；未导出或写processed。说明见data/MANUAL-20261030-220241.REPARSE.md；任务提交SHA在紧接收尾登记。没有复制或改动native，验收说明不冒充原始记录。
+10份证据SHA256与H原网络台账一致；旧auto/FILL_ME/run完整保留.v1。新run模式reparse、requests=0；10条国企原文定位、1具体截止2027-01-25、9显式长期招聘、学历10有值、FILL_ME剩1个PENDING。只读合并通过9/拒绝1；未导出或写processed。说明见data/MANUAL-20261030-220241.REPARSE.md；任务提交b75f99d，紧接收尾提交固化；收尾自身以Git历史定位。没有复制或改动native，验收说明不冒充原始记录。
