@@ -78,6 +78,9 @@ def validate_record(row, root=ROOT, allow_fixtures=False):
         if hashlib.sha256(evidence).hexdigest() != row.get('evidence_hash'):
             errors.append('evidence_hash mismatch')
         text = evidence.decode('utf-8')
+        if row.get('open_status') == 'open' and row.get('application_end') == 'unknown':
+            if row.get('open_basis') != '长期招聘' or not re.search(r'报名截止[：:]?\s*长期招聘[，,]无固定截止日期', text):
+                errors.append('open without deadline requires explicit long-term recruitment evidence')
         if re.search(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?<!\d)1[3-9]\d{9}(?!\d)|(?<!\d)\d{17}[\dXx](?!\d)', text):
             errors.append('evidence requires contact/identifier redaction')
         for key in ('evidence_excerpt', 'condition_text'):

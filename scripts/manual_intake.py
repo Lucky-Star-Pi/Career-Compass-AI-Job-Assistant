@@ -102,7 +102,7 @@ def check_row(raw, root, collected=False):
     row = {key: raw[key] if key in ('条件原文', '证据引用') else raw[key].strip() for key in COLUMNS}
     if row['编号'].upper() == 'SAMPLE' or '示例' in row['备注']:
         return None, ['示例行必须删除'], None
-    remaining = [key for key, value in row.items() if pending(value)]
+    remaining = [key for key, value in row.items() if key != '备注' and pending(value)]
     if remaining:
         return None, ['PENDING未补：' + '、'.join(remaining)], None
     for key in HARD:
@@ -123,9 +123,11 @@ def check_row(raw, root, collected=False):
         errors.append('采集时间须为ISO8601且显式+08:00')
     state = row['开放状态'] if not unknown(row['开放状态']) else 'unknown'
     end = days.get('报名截止')
+    from layout_parser import facts
+    # Read the evidence below before accepting an open-without-date claim.
     if state not in ('open', 'closed', 'unknown'):
         errors.append('开放状态仅允许open/closed/unknown')
-    elif state == 'open' and (end is None or end < date(2026, 10, 31)):
+    elif state == 'open' and end is not None and end < date(2026, 10, 31):
         errors.append('open要求报名截止≥2026-10-31')
     elif state == 'closed' and (end is None or end >= date(2026, 10, 30)):
         errors.append('closed要求报名截止<2026-10-30')
@@ -140,6 +142,9 @@ def check_row(raw, root, collected=False):
         except (OSError, ValueError, UnicodeError):
             errors.append('证据文件须为data/raw内存在的UTF-8 TXT，不可越界')
     if text is not None:
+        source_facts = facts(text, row['证据文件'])
+        if state == 'open' and end is None and source_facts['open_basis'] != '长期招聘':
+            errors.append('open无截止日仅允许证据显式长期招聘')
         if PII.search(text):
             errors.append('证据TXT含邮箱、11位手机号或证件号，须脱敏')
         for key in ('条件原文', '证据引用'):
@@ -178,6 +183,11 @@ def check_row(raw, root, collected=False):
                   human_verification={'state': 'pending', 'verified_at': 'unknown', 'evidence_refs': [evidence_path]},
                   evidence_metadata={'url': row['详情页URL'], 'obtained_at': row['采集时间'], 'http_status': 'unknown', 'screenshot_path': 'unknown'},
                   manual_review_status='entered-not-independently-reviewed')
+    output['field_evidence'] = source_facts['field_evidence']
+    if state == 'open' and end is None and source_facts['open_basis'] == '长期招聘':
+        output.update(open_basis='长期招聘', display_deadline='长期招聘，无固定截止日期')
+    else:
+        output['open_basis'] = '具体截止日期' if end else 'unknown'
     output['missing_fields'] = sorted(key for key, value in output.items() if value == 'unknown')
     # This calls the same evidence/fixture gate as production, without writing processed.
     errors.extend(validate_record(output, root))
@@ -228,7 +238,7 @@ def merge_inputs(fill_path, auto_path):
         errors.append('两表编号集合不一致：缺少或新增的行必须核对，不能静默丢弃')
     merged = []
     for ident, (line, original) in auto_map.items():
-        row = {key: ('PENDING' if not value.strip() else value) for key, value in original.items()}
+        row = {key: ('PENDING' if key != '备注' and not value.strip() else value) for key, value in original.items()}
         if ident in human_map:
             line, entered = human_map[ident]
             for key in FILL_COLUMNS:

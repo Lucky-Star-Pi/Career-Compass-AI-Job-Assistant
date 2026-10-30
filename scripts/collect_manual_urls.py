@@ -12,6 +12,7 @@ from urllib.parse import unquote, urljoin, urlsplit, urlunsplit
 from collect_jobs import ROOT, TZ, LABELS, UNKNOWN_PHRASES, Fetcher, StopCollection, Visible, now, parse_page
 from batch_jobs import atomic_json
 from manual_intake import COLUMNS, FILL_COLUMNS, MAPPING, PII, parse_day, validate_url, write_csv
+from layout_parser import apply_layout
 
 URL_PATTERN = re.compile(r'https://www\.zhidianmijin\.com\.cn/jobs/[0-9a-f-]{36}')
 RISK = re.compile(r'验证码|安全验证|安全检查|访问验证|完成验证|风控|访问异常|captcha|verify you are human', re.I)
@@ -120,6 +121,7 @@ def automatic_row(html, url, obtained, ident, relative):
     evidence = '\n'.join(original_txt.split('\n')[:3]) + '\n# 公告URL：' + announcement + '\n' + body
     if PII.search(evidence) or any(PII.search(str(value)) for value in output.values()):
         raise ValueError('PIIRemaining')
+    output, _ = apply_layout(output, evidence)
     return output, evidence
 
 
@@ -170,7 +172,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', type=Path, default=ROOT / 'data/raw/MANUAL_URLS.txt')
     parser.add_argument('--delay', type=float, default=1.5)
+    parser.add_argument('--reparse', nargs='?', const='MANUAL-20261030-220241', metavar='BATCH', help='offline existing evidence only; no environment or URL file read')
     args = parser.parse_args()
+    if args.reparse:
+        from reparse_manual import reparse
+        return reparse(args.reparse, ROOT)
     if not 1.5 <= args.delay <= 60:
         parser.error('delay must be 1.5..60')
     targets, input_lines = read_urls(args.input)

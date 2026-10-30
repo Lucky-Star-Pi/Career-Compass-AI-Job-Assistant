@@ -59,7 +59,9 @@ class Tests(unittest.TestCase):
     def test_shapes_pending_deadline_not_filled_and_remaining_rejected(self):
         row, auto, fill = self.outputs()
         self.assertEqual(list(row), intake.COLUMNS)
-        self.assertEqual(row['报名截止'], 'PENDING')
+        self.assertEqual(row['报名截止'], '2099-10-30')
+        self.assertEqual(row['开放状态'], 'open')
+        self.assertEqual(row['备注'], '')
         self.assertEqual(row['报名开始'], 'unknown')
         with fill.open(encoding='utf-8-sig') as stream:
             self.assertEqual(next(csv.reader(stream)), intake.FILL_COLUMNS)

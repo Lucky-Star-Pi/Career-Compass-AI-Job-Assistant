@@ -27,3 +27,9 @@ FILL_ME仅有：编号、岗位名称、单位名称、详情页URL、公告URL�
 全部通过后去掉check-only，仅写raw/MANUAL.records.json和MANUAL_REPORT.md。任何拒绝时不导出部分记录。人工另行确认前，不执行import_data.py实际导入，不写processed。
 
 本轮先前的B05-E文件及本人已有save_session.py均保留，H不调用或提交这些会话代码。原始URL清单可能包含附带参数，保留本人原文件，不自动重写；日志与产物只使用去参数后的规范详情URL。
+
+## B05-I 离线重解析覆盖口径
+
+`python scripts/collect_manual_urls.py --reparse`仅从现有MANUAL-20261030-220241证据读取，也可在--reparse后指定另一个同格式批次。无网络、无UA或Cookie读取。原auto/FILL_ME/run保留.v1；已有.v1时拒绝覆盖备份，不能反复重解析破坏旧版。
+布局B单节点学历要求/专业要求优先，布局A三节点作为回退；单位取报名截止前六行的实际单位而非所属集团。性质与日期给出文件/行号/原文引用。
+本I口径替代H的具体截止PENDING和统一人工性质要求：有显式原文即可取值。长期招聘open但截止unknown，open_basis=长期招聘、展示原句，不视作具有固定优选截止或个人资格eligible。公告未写明才是unknown开放状态。备注可空。其他剩余PENDING仍拒绝，证据和PII校验不跳过。
