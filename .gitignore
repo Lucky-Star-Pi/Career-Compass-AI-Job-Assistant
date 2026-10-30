@@ -13,5 +13,6 @@ agent-records/raw/native/*
 !agent-records/raw/native/.gitkeep
 data/private/
 data/.tmp/
+data/raw/.collect.lock
 *.html
 *.htm

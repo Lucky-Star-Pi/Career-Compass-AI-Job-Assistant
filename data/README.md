@@ -10,3 +10,9 @@
 唯一生产闸门：`python scripts/validate_data.py`。
 回归验证：`python scripts/test_data_pipeline.py`。测试在临时目录操作，不向processed写入虚构记录。
 fixtures输出始终在fixtures内部，不影响真实统计；机器通过且0条不等于真实数据或推荐能力通过。
+
+CO-002公开采集：先本地配置CAREER_COMPASS_CONTACT（不在聊天或仓库填写邮箱），再`python scripts/collect_jobs.py --limit 3 --dry-run`。该命令真实发请求、写raw，不是模拟；人审后才能跑30条。只遵守工单白名单，无代理、串行、拒绝重定向；失败停止规则不可关闭。
+
+CO-001.records.csv是共享表头空模板，AUTO CSV逐列一致。原始材料核对后先`python scripts/import_data.py --input data/raw/AUTO-*.records.csv --check-only`；通配符须只匹配一个批次，多批次需明确选择文件。预检不写processed；确认后去掉check-only才导入，已有生产输出仍拒绝覆盖。
+
+当前3条预览的修正与未满足项见B05A_REPORT.md；不把CSV解析能力验证写成3条均可导入。

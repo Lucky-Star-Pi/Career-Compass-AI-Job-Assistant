@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+from csv_records import read_csv
 from pathlib import Path
 from validate_data import ROOT, OPTIONAL, safe_path, validate_record
 
@@ -76,16 +77,26 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('--input', type=Path, required=True)
     p.add_argument('--fixture', action='store_true')
+    p.add_argument('--check-only', action='store_true', help='validate input without writing processed or audit outputs')
     args = p.parse_args()
     if args.fixture != args.input.resolve().is_relative_to((ROOT / 'data/fixtures').resolve()):
         p.error('fixture input must be physically isolated and use --fixture')
-    sources = json.loads(args.input.read_text(encoding='utf-8-sig'))
+    files = sorted(args.input.parent.glob(args.input.name)) if '*' in args.input.name else [args.input]
+    if not files:
+        p.error('input pattern matched no files')
+    if len(files) != 1:
+        p.error('select one concrete batch to avoid ambiguous AUTO identifiers')
+    source_file = files[0]
+    sources = read_csv(source_file) if source_file.suffix.lower() == '.csv' else json.loads(source_file.read_text(encoding='utf-8-sig'))
     if not isinstance(sources, list):
         p.error('input must be JSON array')
     destination = ROOT / ('data/fixtures/output' if args.fixture else 'data/processed')
-    if not args.fixture and (destination / 'jobs.json').exists():
+    if not args.fixture and not args.check_only and (destination / 'jobs.json').exists():
         p.error('existing production jobs.json: archive/reconcile manually before replacement')
     rows, errors, review = import_rows(sources, args.fixture)
+    if args.check_only:
+        print(json.dumps({'mode': 'CHECK_ONLY', 'input': len(sources), 'validated': len(rows), 'failed': len(errors), 'review': len(review), 'processed_written': False}, ensure_ascii=False))
+        raise SystemExit(1 if errors else 0)
     write(destination / 'jobs.json', rows)
     audit = ROOT / ('data/fixtures/audit' if args.fixture else 'data/audit')
     write(audit / 'import-errors.json', errors)

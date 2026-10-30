@@ -35,3 +35,7 @@ MODEL-CHANGE (2026-10-30): agent-records/raw/native/20261030-192543-MODEL-CHANGE
 | 独立收尾 | 由Git历史中chore: record repair SHAs in index and timelog定位 | 本表、TIMELOG和报告修复记录；不回填自身SHA |
 
 实测摘要：notes/REPAIR_VERIFICATION.md，属于验收说明，不是原始对话。按本轮指令未复制、裁剪或重写任何native；本轮原始过程不在既有4份快照内，不能以本说明冒充原文。
+
+## B05-A 有限采集预览
+
+2026-10-30：CO-002授权及UA本地配置/日志脱敏确认来自本次用户原文。代码与文档、3条raw预览见任务提交（下一收尾提交登记SHA）；实际网络台账data/raw/AUTO-20261030-2012.run.json。本文及B05A_REPORT仅为过程/验收说明，不冒充原始对话；不改动或复制既有4份native。先抓3条、离线修正，不跑30条、不导入processed。
