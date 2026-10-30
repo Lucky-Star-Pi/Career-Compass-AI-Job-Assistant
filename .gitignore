@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+__pycache__/
+*.pyc
+.venv/
+*.pdf
+*.docx
+# 原生会话可能包含敏感信息，原样留存仅本地，提交前人工审查
+agent-records/raw/native/*
+!agent-records/raw/native/.gitkeep
+data/private/
+*.html
+*.htm
