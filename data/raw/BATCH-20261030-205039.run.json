@@ -1,0 +1,119 @@
+{
+  "batch": "BATCH-20261030-205039",
+  "started_at": "2026-10-30T20:50:39+08:00",
+  "ended_at": "2026-10-30T20:50:53+08:00",
+  "limit": 1,
+  "target": 50,
+  "baseline": "2026-10-30",
+  "open_from": "2026-10-31",
+  "preferred_from": "2026-11-07",
+  "ua": "Mozilla/5.0 (compatible; CareerCompass/0.1; contest-demo; contact:[REDACTED])",
+  "delay": 1.5,
+  "requests": [
+    {
+      "url": "https://www.zhidianmijin.com.cn/robots.txt",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:50:39+08:00",
+      "gap_after_previous_completion_seconds": "unknown"
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/sitemap.xml",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:50:40+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/sitemaps/jobs-00.xml",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:50:42+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/sitemaps/jobs-01.xml",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:50:46+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/sitemaps/jobs-02.xml",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:50:48+08:00",
+      "gap_after_previous_completion_seconds": 1.5
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/sitemaps/jobs-03.xml",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:50:51+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/00ec9e2f-8403-aacc-c288-fc8f6253a0c4",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:50:53+08:00",
+      "gap_after_previous_completion_seconds": 1.5
+    }
+  ],
+  "details": [
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/00ec9e2f-8403-aacc-c288-fc8f6253a0c4",
+      "lastmod": "2026-10-30T04:06:01.378Z",
+      "http_status": 200,
+      "result": "excluded",
+      "reasons": [
+        "解析失败"
+      ],
+      "error_type": "ValueError",
+      "parser_issue": "IntroductionLabelMissing",
+      "observed_label_counts": {
+        "报名截止": 1,
+        "招聘类型": 1,
+        "工作地点": 1,
+        "薪资待遇": 1,
+        "发布时间": 1,
+        "学历要求": 0,
+        "专业要求": 0,
+        "岗位介绍": 0
+      },
+      "visible_headings": [
+        "迪卡侬运动部门经理（校园招聘）--泰州",
+        "能不能报"
+      ],
+      "partial_evidence_path": "data/raw/BATCH-20261030-205039.pages/001.evidence.txt",
+      "partial_evidence_hash": "d10125e84299efdad40e29d87a714a0ad6c7dda5ab259f8c8c678a631c3f89a8"
+    }
+  ],
+  "detail_pages": 1,
+  "qualified": [],
+  "secondary": [],
+  "stop_reason": "PageLimitReached",
+  "validation_passed": false,
+  "robots": {
+    "http_status": 200,
+    "checked_at": "2026-10-30T20:50:39+08:00",
+    "rules": [
+      "User-agent: *",
+      "Allow: /",
+      "Disallow: /api/",
+      "Sitemap: https://www.zhidianmijin.com.cn/sitemap.xml"
+    ],
+    "hard_deny": "/api/"
+  },
+  "sitemap_shards": [
+    "https://www.zhidianmijin.com.cn/sitemaps/jobs-00.xml",
+    "https://www.zhidianmijin.com.cn/sitemaps/jobs-01.xml",
+    "https://www.zhidianmijin.com.cn/sitemaps/jobs-02.xml",
+    "https://www.zhidianmijin.com.cn/sitemaps/jobs-03.xml"
+  ],
+  "discovered_urls": 16174,
+  "already_seen": 23,
+  "request_count": 7,
+  "qualified_count": 0,
+  "excluded_count": 1
+}

@@ -16,3 +16,6 @@ CO-002公开采集：先本地配置CAREER_COMPASS_CONTACT（不在聊天或仓�
 CO-001.records.csv是共享表头空模板，AUTO CSV逐列一致。原始材料核对后先`python scripts/import_data.py --input data/raw/AUTO-*.records.csv --check-only`；通配符须只匹配一个批次，多批次需明确选择文件。预检不写processed；确认后去掉check-only才导入，已有生产输出仍拒绝覆盖。
 
 当前3条预览的修正与未满足项见B05A_REPORT.md；不把CSV解析能力验证写成3条均可导入。
+
+B05-C/CO-003取代原CO-002运行上限：先`python scripts/collect_jobs.py --limit 10 --delay 1.5`，通过代码产出门禁后才允许`--limit 150`。当前未有通过的pilot，150被代码拦截。最终严格CSV不包含unknown招聘类型、未知截止或社招，不把源数据筛选结果当个人eligible。
+只读检查可同时读取BATCH-*.records.csv多个批次；实际导入仍要求具体单批且需人工确认。当前各BATCH CSV无入选行，input_empty=true不能当数据验收完成。详情见B05C_REPORT.md。

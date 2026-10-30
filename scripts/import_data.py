@@ -69,7 +69,8 @@ def import_rows(sources, fixture):
                 review.append({'record_id': row['id'], 'conflicts': row['conflicts']})
         except (ValueError, OSError, TypeError, KeyError) as exc:
             # Do not log source content or exception payload containing user material.
-            errors.append({'input_index': index, 'reason': type(exc).__name__, 'action': 'check CONTRACT required fields and evidence; original retained'})
+            reason = str(exc) if isinstance(exc, ValueError) and str(exc).startswith('missing required manual field: ') else type(exc).__name__
+            errors.append({'input_index': index, 'reason': reason, 'action': 'check CONTRACT required fields and evidence; original retained'})
     return imported, errors, review
 
 
@@ -84,10 +85,14 @@ if __name__ == '__main__':
     files = sorted(args.input.parent.glob(args.input.name)) if '*' in args.input.name else [args.input]
     if not files:
         p.error('input pattern matched no files')
-    if len(files) != 1:
+    if len(files) != 1 and not args.check_only:
         p.error('select one concrete batch to avoid ambiguous AUTO identifiers')
-    source_file = files[0]
-    sources = read_csv(source_file) if source_file.suffix.lower() == '.csv' else json.loads(source_file.read_text(encoding='utf-8-sig'))
+    sources = []
+    for source_file in files:
+        part = read_csv(source_file) if source_file.suffix.lower() == '.csv' else json.loads(source_file.read_text(encoding='utf-8-sig'))
+        if not isinstance(part, list):
+            p.error('input must be record array')
+        sources.extend(part)
     if not isinstance(sources, list):
         p.error('input must be JSON array')
     destination = ROOT / ('data/fixtures/output' if args.fixture else 'data/processed')
@@ -95,7 +100,7 @@ if __name__ == '__main__':
         p.error('existing production jobs.json: archive/reconcile manually before replacement')
     rows, errors, review = import_rows(sources, args.fixture)
     if args.check_only:
-        print(json.dumps({'mode': 'CHECK_ONLY', 'input': len(sources), 'validated': len(rows), 'failed': len(errors), 'review': len(review), 'processed_written': False}, ensure_ascii=False))
+        print(json.dumps({'mode': 'CHECK_ONLY', 'input': len(sources), 'validated': len(rows), 'failed': len(errors), 'errors': errors, 'review': len(review), 'input_empty': not bool(sources), 'processed_written': False}, ensure_ascii=False))
         raise SystemExit(1 if errors else 0)
     write(destination / 'jobs.json', rows)
     audit = ROOT / ('data/fixtures/audit' if args.fixture else 'data/audit')

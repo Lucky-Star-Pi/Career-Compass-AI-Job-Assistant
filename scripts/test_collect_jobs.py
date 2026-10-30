@@ -15,6 +15,7 @@ from validate_data import ROOT
 URL = 'https://www.zhidianmijin.com.cn/jobs/00000000-0000-0000-0000-000000000001'
 # Fictional parser fixture only; never a real job.
 HTML = '''<html><head><title>虚构岗位｜虚构单位｜职点迷津</title></head><body><main>
+<h1>虚构岗位</h1><p>虚构单位</p>
 <div>报名截止</div><div>2099年10月30日</div><div>招聘类型</div><div>虚构校招</div>
 <div>工作地点</div><div>虚构地区</div><div>薪资待遇</div><div>公告未写明</div>
 <div>发布时间</div><div>2026年10月30日</div><div>学历要求</div><div>本科及以上学历。</div>
@@ -41,7 +42,7 @@ class Tests(unittest.TestCase):
         self.assertIn('education', missing['missing_fields'])
 
     def test_unknown_deadline_and_same_day(self):
-        for replacement, state in (('长期招聘，无固定截止日期', 'unknown'), ('2026年10月30日', 'unknown'), ('2020年1月1日', 'closed')):
+        for replacement, state in (('长期招聘，无固定截止日期', 'unknown'), ('2026年10月30日', 'closed'), ('2020年1月1日', 'closed')):
             row, _ = parse_page(HTML.replace('2099年10月30日', replacement), URL, '2026-10-30T21:05:00+08:00', 'AUTO-01', 'data/raw/test.txt')
             self.assertEqual(row['open_status'], state)
 
@@ -57,6 +58,39 @@ class Tests(unittest.TestCase):
         self.assertNotIn('missing_fields', row['missing_fields'])
         row, _ = parse_page(html.replace('虚构单位', '广东省/东莞市'), URL, '2026-10-30T21:05:00+08:00', 'AUTO-01', 'data/raw/test.txt')
         self.assertEqual(row['employer'], 'unknown')
+
+    def test_body_employer_split_labels_and_fixed_baseline(self):
+        html = HTML.replace('虚构岗位｜虚构单位｜职点迷津', '虚构岗位｜虚构地区市｜职点迷津')
+        html = html.replace('<p>虚构单位</p>', '<p>虚构单位有限公司</p>')
+        html = html.replace('<div>学历要求</div>', '<dt>学历<span>要求</span></dt>')
+        html = html.replace('<div>专业要求</div>', '<dt>专业<span>要求</span></dt>')
+        html = html.replace('<div>公告未写明</div><h2>岗位介绍', '<div>计算机专业</div><h2>岗位介绍')
+        html = html.replace('2099年10月30日', '2026年10月31日')
+        row, txt = parse_page(html, URL, '2099-12-01T21:05:00+08:00', 'BATCH-01', 'data/raw/test.txt')
+        self.assertEqual(row['employer'], '虚构单位有限公司')
+        self.assertEqual(txt.splitlines()[3], '虚构单位有限公司')
+        self.assertEqual(row['education']['raw'], '本科及以上学历。')
+        self.assertEqual(row['major']['raw'], '计算机专业')
+        self.assertEqual(row['open_status'], 'open')
+        self.assertEqual(row['application_start'], 'unknown')
+
+    def test_intro_navigation_and_field_order(self):
+        html = HTML.replace('<h1>虚构岗位</h1>', '<div>岗位介绍</div><h1>虚构岗位</h1>')
+        html = html.replace('<div>学历要求</div><div>本科及以上学历。</div>', '')
+        html = html.replace('<div>招聘类型</div>', '<div>学历要求</div><div>本科及以上学历。</div><div>招聘类型</div>')
+        row, txt = parse_page(html, URL, '2026-10-30T21:05:00+08:00', 'BATCH-01', 'data/raw/test.txt')
+        self.assertEqual(row['education']['raw'], '本科及以上学历。')
+        self.assertEqual(row['application_end']['normalized'], '2099-10-30')
+        self.assertNotIn('不应进入证据', txt)
+
+    def test_actual_omitted_introduction_is_not_fabricated(self):
+        html = HTML[:HTML.index('<h2>岗位介绍</h2>')] + '<p>选好学历和专业，这里会逐项判断能不能报。</p><a>查看原始公告</a></main></body></html>'
+        html = html.replace('<div>学历要求</div>', '<h2>能不能报</h2><div>学历要求</div>')
+        row, txt = parse_page(html, URL, '2026-10-30T21:05:00+08:00', 'BATCH-01', 'data/raw/test.txt')
+        self.assertIn('岗位介绍', row['missing_fields'])
+        self.assertIn('本科及以上学历。', row['condition_text'])
+        self.assertIn(row['condition_text'], txt)
+        self.assertNotIn('选好学历', txt)
 
     def test_url_allowlist_and_redirect(self):
         self.assertTrue(allowed(URL))

@@ -39,3 +39,7 @@ MODEL-CHANGE (2026-10-30): agent-records/raw/native/20261030-192543-MODEL-CHANGE
 ## B05-A 有限采集预览
 
 2026-10-30：CO-002授权及UA本地配置/日志脱敏确认来自本次用户原文。代码与文档、3条raw预览任务提交c58c86f；实际网络台账data/raw/AUTO-20261030-2012.run.json。本文及B05A_REPORT仅为过程/验收说明，不冒充原始对话；不改动或复制既有4份native。先抓3条、离线修正，不跑30条、不导入processed。索引收尾提交自身由Git历史定位。
+
+## B05-C 有限扩量与时间筛选
+
+2026-10-30追加授权原文在本聊天；实际过程见5份BATCH run.json及data/B05C_REPORT.md。41个不同详情、71请求，严格入选0；最终10页失败，未运行150。没有保存HTML、没有改动native或processed。上述报告是验收说明，不冒充原始对话；任务提交SHA在紧接收尾提交登记。

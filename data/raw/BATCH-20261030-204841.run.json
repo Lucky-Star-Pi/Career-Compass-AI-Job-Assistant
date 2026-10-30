@@ -1,0 +1,365 @@
+{
+  "batch": "BATCH-20261030-204841",
+  "started_at": "2026-10-30T20:48:41+08:00",
+  "ended_at": "2026-10-30T20:49:17+08:00",
+  "limit": 10,
+  "target": 50,
+  "baseline": "2026-10-30",
+  "open_from": "2026-10-31",
+  "preferred_from": "2026-11-07",
+  "ua": "Mozilla/5.0 (compatible; CareerCompass/0.1; contest-demo; contact:[REDACTED])",
+  "delay": 1.5,
+  "requests": [
+    {
+      "url": "https://www.zhidianmijin.com.cn/robots.txt",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:48:41+08:00",
+      "gap_after_previous_completion_seconds": "unknown"
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/sitemap.xml",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:48:43+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/sitemaps/jobs-00.xml",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:48:45+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/sitemaps/jobs-01.xml",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:48:49+08:00",
+      "gap_after_previous_completion_seconds": 1.5
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/sitemaps/jobs-02.xml",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:48:53+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/sitemaps/jobs-03.xml",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:48:57+08:00",
+      "gap_after_previous_completion_seconds": 1.5
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/01e36541-ad99-3c78-b67f-8679f8a44f10",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:49:01+08:00",
+      "gap_after_previous_completion_seconds": 1.5
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/02ee3efd-0b6e-571c-85e2-6e6df1bdcddc",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:49:03+08:00",
+      "gap_after_previous_completion_seconds": 1.5
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/00f46f4f-946c-5ec7-d617-9babd654ce43",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:49:05+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/00c1c742-7e55-8e5c-60c6-02a4b64ae03c",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:49:07+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/028e96e2-1e7c-f117-fc7b-b212d923fd73",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:49:08+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/005e99e5-8a36-8ea0-27d7-3a13f5a510a8",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:49:10+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/008f096f-365a-c820-7034-b260687c4457",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:49:12+08:00",
+      "gap_after_previous_completion_seconds": 1.5
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/00fe0c5f-1df1-f0bb-1d9e-fc7187b0ddd4",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:49:13+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/02e25800-12c8-e9be-3e03-19cee4235083",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:49:15+08:00",
+      "gap_after_previous_completion_seconds": 1.501
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/0074a7ea-5b32-e40f-33cc-7bc95f05a97f",
+      "http_status": 200,
+      "error_type": "unknown",
+      "obtained_at": "2026-10-30T20:49:17+08:00",
+      "gap_after_previous_completion_seconds": 1.5
+    }
+  ],
+  "details": [
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/01e36541-ad99-3c78-b67f-8679f8a44f10",
+      "lastmod": "2026-10-30T10:06:05.483Z",
+      "http_status": 200,
+      "result": "excluded",
+      "reasons": [
+        "解析失败"
+      ],
+      "error_type": "ValueError",
+      "parser_issue": "IntroductionLabelMissing",
+      "observed_label_counts": {
+        "报名截止": 1,
+        "招聘类型": 1,
+        "工作地点": 1,
+        "薪资待遇": 1,
+        "发布时间": 1,
+        "学历要求": 0,
+        "专业要求": 0,
+        "岗位介绍": 0
+      }
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/02ee3efd-0b6e-571c-85e2-6e6df1bdcddc",
+      "lastmod": "2026-10-30T10:06:05.483Z",
+      "http_status": 200,
+      "result": "excluded",
+      "reasons": [
+        "解析失败"
+      ],
+      "error_type": "ValueError",
+      "parser_issue": "IntroductionLabelMissing",
+      "observed_label_counts": {
+        "报名截止": 1,
+        "招聘类型": 1,
+        "工作地点": 1,
+        "薪资待遇": 1,
+        "发布时间": 1,
+        "学历要求": 0,
+        "专业要求": 0,
+        "岗位介绍": 0
+      }
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/00f46f4f-946c-5ec7-d617-9babd654ce43",
+      "lastmod": "2026-10-30T10:06:04.136Z",
+      "http_status": 200,
+      "result": "excluded",
+      "reasons": [
+        "解析失败"
+      ],
+      "error_type": "ValueError",
+      "parser_issue": "IntroductionLabelMissing",
+      "observed_label_counts": {
+        "报名截止": 1,
+        "招聘类型": 1,
+        "工作地点": 1,
+        "薪资待遇": 1,
+        "发布时间": 1,
+        "学历要求": 0,
+        "专业要求": 0,
+        "岗位介绍": 0
+      }
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/00c1c742-7e55-8e5c-60c6-02a4b64ae03c",
+      "lastmod": "2026-10-30T10:06:03.026Z",
+      "http_status": 200,
+      "result": "excluded",
+      "reasons": [
+        "解析失败"
+      ],
+      "error_type": "ValueError",
+      "parser_issue": "IntroductionLabelMissing",
+      "observed_label_counts": {
+        "报名截止": 1,
+        "招聘类型": 1,
+        "工作地点": 1,
+        "薪资待遇": 1,
+        "发布时间": 1,
+        "学历要求": 0,
+        "专业要求": 0,
+        "岗位介绍": 0
+      }
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/028e96e2-1e7c-f117-fc7b-b212d923fd73",
+      "lastmod": "2026-10-30T10:06:03.026Z",
+      "http_status": 200,
+      "result": "excluded",
+      "reasons": [
+        "解析失败"
+      ],
+      "error_type": "ValueError",
+      "parser_issue": "IntroductionLabelMissing",
+      "observed_label_counts": {
+        "报名截止": 1,
+        "招聘类型": 1,
+        "工作地点": 1,
+        "薪资待遇": 1,
+        "发布时间": 1,
+        "学历要求": 0,
+        "专业要求": 0,
+        "岗位介绍": 0
+      }
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/005e99e5-8a36-8ea0-27d7-3a13f5a510a8",
+      "lastmod": "2026-10-30T10:06:01.492Z",
+      "http_status": 200,
+      "result": "excluded",
+      "reasons": [
+        "解析失败"
+      ],
+      "error_type": "ValueError",
+      "parser_issue": "IntroductionLabelMissing",
+      "observed_label_counts": {
+        "报名截止": 1,
+        "招聘类型": 1,
+        "工作地点": 1,
+        "薪资待遇": 1,
+        "发布时间": 1,
+        "学历要求": 0,
+        "专业要求": 0,
+        "岗位介绍": 0
+      }
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/008f096f-365a-c820-7034-b260687c4457",
+      "lastmod": "2026-10-30T10:06:01.492Z",
+      "http_status": 200,
+      "result": "excluded",
+      "reasons": [
+        "解析失败"
+      ],
+      "error_type": "ValueError",
+      "parser_issue": "IntroductionLabelMissing",
+      "observed_label_counts": {
+        "报名截止": 1,
+        "招聘类型": 1,
+        "工作地点": 1,
+        "薪资待遇": 1,
+        "发布时间": 1,
+        "学历要求": 0,
+        "专业要求": 0,
+        "岗位介绍": 0
+      }
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/00fe0c5f-1df1-f0bb-1d9e-fc7187b0ddd4",
+      "lastmod": "2026-10-30T10:06:01.492Z",
+      "http_status": 200,
+      "result": "excluded",
+      "reasons": [
+        "解析失败"
+      ],
+      "error_type": "ValueError",
+      "parser_issue": "IntroductionLabelMissing",
+      "observed_label_counts": {
+        "报名截止": 1,
+        "招聘类型": 1,
+        "工作地点": 1,
+        "薪资待遇": 1,
+        "发布时间": 1,
+        "学历要求": 0,
+        "专业要求": 0,
+        "岗位介绍": 0
+      }
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/02e25800-12c8-e9be-3e03-19cee4235083",
+      "lastmod": "2026-10-30T10:06:01.492Z",
+      "http_status": 200,
+      "result": "excluded",
+      "reasons": [
+        "解析失败"
+      ],
+      "error_type": "ValueError",
+      "parser_issue": "IntroductionLabelMissing",
+      "observed_label_counts": {
+        "报名截止": 1,
+        "招聘类型": 1,
+        "工作地点": 1,
+        "薪资待遇": 1,
+        "发布时间": 1,
+        "学历要求": 0,
+        "专业要求": 0,
+        "岗位介绍": 0
+      }
+    },
+    {
+      "url": "https://www.zhidianmijin.com.cn/jobs/0074a7ea-5b32-e40f-33cc-7bc95f05a97f",
+      "lastmod": "2026-10-30T04:06:01.378Z",
+      "http_status": 200,
+      "result": "excluded",
+      "reasons": [
+        "解析失败"
+      ],
+      "error_type": "ValueError",
+      "parser_issue": "IntroductionLabelMissing",
+      "observed_label_counts": {
+        "报名截止": 1,
+        "招聘类型": 1,
+        "工作地点": 1,
+        "薪资待遇": 1,
+        "发布时间": 1,
+        "学历要求": 0,
+        "专业要求": 0,
+        "岗位介绍": 0
+      }
+    }
+  ],
+  "detail_pages": 10,
+  "qualified": [],
+  "secondary": [],
+  "stop_reason": "PageLimitReached",
+  "validation_passed": false,
+  "robots": {
+    "http_status": 200,
+    "checked_at": "2026-10-30T20:48:41+08:00",
+    "rules": [
+      "User-agent: *",
+      "Allow: /",
+      "Disallow: /api/",
+      "Sitemap: https://www.zhidianmijin.com.cn/sitemap.xml"
+    ],
+    "hard_deny": "/api/"
+  },
+  "sitemap_shards": [
+    "https://www.zhidianmijin.com.cn/sitemaps/jobs-00.xml",
+    "https://www.zhidianmijin.com.cn/sitemaps/jobs-01.xml",
+    "https://www.zhidianmijin.com.cn/sitemaps/jobs-02.xml",
+    "https://www.zhidianmijin.com.cn/sitemaps/jobs-03.xml"
+  ],
+  "discovered_urls": 16174,
+  "already_seen": 13,
+  "request_count": 16,
+  "qualified_count": 0,
+  "excluded_count": 10
+}
