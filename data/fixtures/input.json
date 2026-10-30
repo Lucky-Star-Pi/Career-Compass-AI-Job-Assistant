@@ -1,0 +1,14 @@
+[
+  {
+    "id": "FICTIONAL-001",
+    "name": "虚构岗位",
+    "employer": "虚构单位",
+    "source_url": "https://example.invalid/FICTIONAL-001",
+    "obtained_at": "2026-10-30T19:04:53+08:00",
+    "raw_snapshot": "data/fixtures/example.evidence.txt",
+    "condition_text": "虚构单位的虚构岗位要求本科，专业条件未提供。",
+    "evidence_excerpt": "虚构单位的虚构岗位要求本科，专业条件未提供。",
+    "education": {"raw": "要求本科", "normalized": "本科", "evidence_ref": "data/fixtures/example.evidence.txt"},
+    "is_fixture": true
+  }
+]

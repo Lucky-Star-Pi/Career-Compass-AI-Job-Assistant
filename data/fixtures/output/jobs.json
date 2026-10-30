@@ -1,0 +1,84 @@
+[
+  {
+    "batch": "unknown",
+    "location": "unknown",
+    "organization_type": "unknown",
+    "announcement_url": "unknown",
+    "application_url": "unknown",
+    "last_verified_at": "unknown",
+    "published_at": "unknown",
+    "application_start": "unknown",
+    "application_end": "unknown",
+    "education": {
+      "raw": "要求本科",
+      "normalized": "本科",
+      "evidence_ref": "data/fixtures/example.evidence.txt"
+    },
+    "degree": "unknown",
+    "major": "unknown",
+    "graduation_time": "unknown",
+    "experience": "unknown",
+    "political_status": "unknown",
+    "certificates": "unknown",
+    "age": "unknown",
+    "other_restrictions": "unknown",
+    "profile_version": "unknown",
+    "id": "FICTIONAL-001",
+    "name": "虚构岗位",
+    "employer": "虚构单位",
+    "source_url": "https://example.invalid/FICTIONAL-001",
+    "obtained_at": "2026-10-30T19:04:53+08:00",
+    "raw_snapshot": "data/fixtures/example.evidence.txt",
+    "condition_text": "虚构单位的虚构岗位要求本科，专业条件未提供。",
+    "evidence_excerpt": "虚构单位的虚构岗位要求本科，专业条件未提供。",
+    "is_fixture": true,
+    "evidence_hash": "d0c5428b518996f9959c17fbcde17c27437c1535dfd53b72a86f705f64290bfd",
+    "conditions": [],
+    "standardized_values": {},
+    "logical_relationships": [],
+    "human_verification": {
+      "state": "pending",
+      "verified_at": "unknown",
+      "evidence_refs": []
+    },
+    "open_status": "unknown",
+    "conflicts": [],
+    "evaluations": [],
+    "profile_confirmed": false,
+    "status": "unknown",
+    "missing_fields": [
+      "age",
+      "announcement_url",
+      "application_end",
+      "application_start",
+      "application_url",
+      "batch",
+      "certificates",
+      "degree",
+      "experience",
+      "graduation_time",
+      "last_verified_at",
+      "location",
+      "major",
+      "organization_type",
+      "other_restrictions",
+      "political_status",
+      "profile_version",
+      "published_at"
+    ],
+    "evidence_metadata": {
+      "url": "https://example.invalid/FICTIONAL-001",
+      "obtained_at": "2026-10-30T19:04:53+08:00",
+      "http_status": "unknown",
+      "screenshot_path": "unknown"
+    },
+    "source_refs": [
+      {
+        "source_url": "https://example.invalid/FICTIONAL-001",
+        "obtained_at": "2026-10-30T19:04:53+08:00",
+        "raw_snapshot": "data/fixtures/example.evidence.txt",
+        "evidence_hash": "d0c5428b518996f9959c17fbcde17c27437c1535dfd53b72a86f705f64290bfd"
+      }
+    ]
+  }
+]

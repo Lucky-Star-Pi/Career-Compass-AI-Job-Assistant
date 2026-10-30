@@ -1,0 +1,8 @@
+# Evidence hashes must survive Git checkout on Windows.
+*.txt text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.csv text eol=lf
+# Native byte snapshots are not normalized (also ignored by default).
+*.jsonl -text
