@@ -15,3 +15,9 @@ B04 预备提交：007b903。
 | raw/native/20261030-191213-STAGE1.jsonl（本地隔离） | B02/B03/B04 | 2026-10-30T19:12:13+08:00 | 76e8f97 / 774553c / 007b903 | 3798c1d11ceea90637217a38b9bd8edaca41a46122f5163b7f8928ee5eb7aaf9 | native-byte-prefix-copy |
 
 第二快照331行，重开哈希一致；覆盖到捕获前的真实过程，不含捕获后的报告与push。
+
+| 文件 | 任务 | 捕获时间 | 关联提交 | SHA256 | export_method |
+|---|---|---|---|---|---|
+| raw/native/20261030-191705-CLOSURE.jsonl（本地隔离） | 阶段报告/首次push | 2026-10-30T19:17:05+08:00 | 64f7996 | 0e747acb504c0491a993035067be109eac21d5b1119200fde1afecb9438f80a9 | native-byte-prefix-copy |
+
+阶段报告提交64f7996；首次push成功。CLOSURE后审计及最终回复未包含，不以摘要补造。最后审计提交本身可由Git历史定位。
