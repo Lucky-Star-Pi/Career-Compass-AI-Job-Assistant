@@ -50,8 +50,12 @@ MODEL-CHANGE (2026-10-30): agent-records/raw/native/20261030-192543-MODEL-CHANGE
 
 ## B05-H 人工URL清单
 
-本人提供15非空行，规范化选10/跳过5；MANUAL-20261030-220241批次仅10个详情GET，10成功、0失败、34个PENDING；未填合并实际拒绝10行。元数据和人工核对表见data/MANUAL-20261030-220241.REPORT.md。6项H测试和9项G回归通过，补齐合并仅用临时合成输入验证，不冒充10条真实已人工核验。未读会话、未触碰native、未写processed；任务提交dfdc631；紧接收尾提交固化关联，收尾自身以Git历史定位。
+本人提供15非空行，规范化选10/跳过5；MANUAL-20261030-220241批次仅10个详情GET，10成功、0失败、34个PENDING；未填合并实际拒绝10行。元数据和人工核对表见docs/reports/MANUAL-20261030-220241.REPORT.md。6项H测试和9项G回归通过，补齐合并仅用临时合成输入验证，不冒充10条真实已人工核验。未读会话、未触碰native、未写processed；任务提交dfdc631；紧接收尾提交固化关联，收尾自身以Git历史定位。
 
 ## B05-I 布局A/B离线修复
 
-10份证据SHA256与H原网络台账一致；旧auto/FILL_ME/run完整保留.v1。新run模式reparse、requests=0；10条国企原文定位、1具体截止2027-01-25、9显式长期招聘、学历10有值、FILL_ME剩1个PENDING。只读合并通过9/拒绝1；未导出或写processed。说明见data/MANUAL-20261030-220241.REPARSE.md；任务提交b75f99d，紧接收尾提交固化；收尾自身以Git历史定位。没有复制或改动native，验收说明不冒充原始记录。
+10份证据SHA256与H原网络台账一致；旧auto/FILL_ME/run完整保留.v1。新run模式reparse、requests=0；10条国企原文定位、1具体截止2027-01-25、9显式长期招聘、学历10有值、FILL_ME剩1个PENDING。只读合并通过9/拒绝1；未导出或写processed。说明见docs/reports/MANUAL-20261030-220241.REPARSE.md；任务提交b75f99d，紧接收尾提交固化；收尾自身以Git历史定位。没有复制或改动native，验收说明不冒充原始记录。
+
+## 夜间 A→D 验收索引
+
+A：53939a2；B：f56c971；C：0cad7c5；D：本节所在提交（由Git历史定位，避免自身SHA循环）。报告OVERNIGHT_STATUS.md与data/IMPORT_REPORT.md为验收说明，export_method=verification-note，不是原始记录。未读取、复制、改写native，未补造聊天原文；本轮原始导出仍需人工按DELIVERY_PLAN交付，缺口不以本节摘要替代。10份证据SHA256列于OVERNIGHT_STATUS，关联raw/processed/app只读副本可复核。迁移后的历史报告路径已同步。

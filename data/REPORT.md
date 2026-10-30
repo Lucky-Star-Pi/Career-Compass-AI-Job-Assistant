@@ -1,13 +1,20 @@
 # 岗位数据报告（含阶段一历史快照）
 
+## 夜间 A/B 最新状态（覆盖以下历史阶段状态）
+
+真实导入10条；采集时间窗2026-10-30T22:02:42+08:00至2026-10-30T22:02:57+08:00（精确逐条见processed）。0个PENDING，个人资格全unknown；来源人工复核仍pending，不宣称已独立人工核验。证据10份未改动；1具体截止、9显式长期招聘。明细见[导入报告](IMPORT_REPORT.md)。
+
+## 以下为历史阶段记录
+
+
 ## B05-I 当前离线重解析
 
-同批10份证据字节未变；10条国企带原文定位、学历10条有值；具体截止2027-01-25共1条，显式长期招聘9条（open、application_end仍unknown、open_basis=长期招聘），FILL_ME剩1个PENDING。只读合并检查通过9/拒绝1，第一条仍待公告URL/工作经验/证书；没有执行导出或processed导入。新run记录requests=0，原网络与旧表保留.v1。详细对比见MANUAL-20261030-220241.REPARSE.md；以下H/G等为历史状态。
+同批10份证据字节未变；10条国企带原文定位、学历10条有值；具体截止2027-01-25共1条，显式长期招聘9条（open、application_end仍unknown、open_basis=长期招聘），FILL_ME剩1个PENDING。只读合并检查通过9/拒绝1，第一条仍待公告URL/工作经验/证书；没有执行导出或processed导入。新run记录requests=0，原网络与旧表保留.v1。详细对比见../docs/reports/MANUAL-20261030-220241.REPARSE.md；以下H/G等为历史状态。
 
 ## B05-H 当前人工URL详情通道
 
 本人清单15个非空行：10个合法详情、5个非法行；仅请求这10个详情，10次HTTP200、成功产物10条、失败0。34个PENDING尚未人工补齐，合并检查通过0/拒绝10；人工审核通过与实际导出仍0，processed仍0。
-抓取时间窗及逐条待补项见MANUAL-20261030-220241.REPORT.md和raw同批run.json。该10条是详情候选，不宣称可报名；未请求列表、sitemap、API或公告站，也未使用Cookie。原始人工清单保留本地，产物只记录去query/fragment后的安全详情URL。
+抓取时间窗及逐条待补项见../docs/reports/MANUAL-20261030-220241.REPORT.md和raw同批run.json。该10条是详情候选，不宣称可报名；未请求列表、sitemap、API或公告站，也未使用Cookie。原始人工清单保留本地，产物只记录去query/fragment后的安全详情URL。
 
 ## B05-G 当前人工录入口径
 

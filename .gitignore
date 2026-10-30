@@ -18,3 +18,5 @@ data/raw/.collect.lock
 data/raw/MANUAL_URLS.txt
 *.html
 *.htm
+
+*.tsbuildinfo

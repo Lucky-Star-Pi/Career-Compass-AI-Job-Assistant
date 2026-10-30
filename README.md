@@ -2,7 +2,9 @@
 
 一个属于自己的 AI 求职助手网站，帮助大学生寻找央国企岗位。
 
-阶段一：记录、选型、数据契约与零依赖导入验证。尚无业务应用。
+夜间 A→D：10条真实来源候选已导入；本地 Next.js 应用骨架已建立，尚未部署。
+
+本地启动：`npm run build --prefix app`、`npm start --prefix app`，打开 `http://127.0.0.1:3000`。使用与限制见 [应用说明](app/README.md)，验收结果见 [夜间状态](OVERNIGHT_STATUS.md)。
 
 冻结选型见 docs/DECISIONS.md；数据政策见 docs/DATA_SCOPE.md 和 data/GIT_POLICY.md。
 单一校验入口：`python scripts/validate_data.py`（B03 建立）。
