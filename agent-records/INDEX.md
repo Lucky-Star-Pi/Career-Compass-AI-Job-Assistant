@@ -24,3 +24,14 @@ B04 预备提交：007b903。
 
 
 MODEL-CHANGE (2026-10-30): agent-records/raw/native/20261030-192543-MODEL-CHANGE.jsonl | 2026-10-30T19:25:43+08:00 | SHA256 342d5822d32ab565dfb7e4bd35307b124b584c67affe5c624b3f632aa415cdc7 | native-byte-prefix-copy | commit: 3908689; local only, privacy review pending.
+
+## 阶段一审查修复
+
+| 任务 | 关联commit | 记录 |
+|---|---|---|
+| D1/D2主体/D7/D8 | 4d5e018；清单/耗时字段及P00补正在本轮收尾提交 | 三段推送及历史SHA；没有改动native |
+| D3 | dc2b3b8 | DELIVERY_PLAN.md；原件/副本尚未制作或交付 |
+| D4/D6 | e10ce5f | 离线校验与新URL用例实测通过 |
+| 独立收尾 | 由Git历史中chore: record repair SHAs in index and timelog定位 | 本表、TIMELOG和报告修复记录；不回填自身SHA |
+
+实测摘要：notes/REPAIR_VERIFICATION.md，属于验收说明，不是原始对话。按本轮指令未复制、裁剪或重写任何native；本轮原始过程不在既有4份快照内，不能以本说明冒充原文。
