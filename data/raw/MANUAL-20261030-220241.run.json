@@ -5,7 +5,7 @@
   "ended_at": "2026-10-30T22:27:35+08:00",
   "requests": 0,
   "request_count": 0,
-  "source_run": "data/raw/MANUAL-20261030-220241.run.json.v1",
+  "source_run": "data/raw/archive/MANUAL-20261030-220241.run.json.v1",
   "records": [
     {
       "id": "MANUAL-20261030-220241-01",
@@ -466,8 +466,8 @@
   "fill_pending_count": 1,
   "processed_written": false,
   "backup_sha256": {
-    "data/raw/MANUAL-20261030-220241.auto.csv.v1": "9f6a466d5382903ea2c5b3210d1e084c2a672d4bea9cbc0e367c7142896d48a5",
-    "data/raw/MANUAL-20261030-220241.FILL_ME.csv.v1": "27b767d81f3f84d11b263ed2f36905f7860c5674f5b24b219cd8d55ed00259af",
-    "data/raw/MANUAL-20261030-220241.run.json.v1": "24b19ee837abea0c6c52e53d2385919e3936c426979f5a2431ba3cfa1e3349c9"
+    "data/raw/archive/MANUAL-20261030-220241.auto.csv.v1": "9f6a466d5382903ea2c5b3210d1e084c2a672d4bea9cbc0e367c7142896d48a5",
+    "data/raw/archive/MANUAL-20261030-220241.FILL_ME.csv.v1": "27b767d81f3f84d11b263ed2f36905f7860c5674f5b24b219cd8d55ed00259af",
+    "data/raw/archive/MANUAL-20261030-220241.run.json.v1": "24b19ee837abea0c6c52e53d2385919e3936c426979f5a2431ba3cfa1e3349c9"
   }
 }

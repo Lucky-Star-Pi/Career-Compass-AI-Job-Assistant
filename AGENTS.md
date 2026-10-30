@@ -1,8 +1,11 @@
 # 执行约定
 
+- 当前夜间A→D授权覆盖此前阶段限制：修复数据后允许导入10条；整理文档；建立Next.js 15/React/Tailwind与已批准的react-dom、TypeScript、@types配套骨架。禁止部署、交互push与额外业务依赖；完成即停。主文档在docs/，历史报告在docs/reports/；证据路径保持data/raw不动。
+
 - 冻结：Next.js 15 App Router / TypeScript / Tailwind；Neon PostgreSQL；DeepSeek-V4.1-Flash-1017 主（API ID：deepseek-flash），DashScope qwen-plus 备、qwen-turbo 轻任务；Vercel Hobby + Git。主模型变更依据参赛者2026-10-30追加指令，不再使用deepseek-chat。
 - 不用向量库、微服务、多代理编排、OCR。本阶段不初始化框架、不安装依赖、不写业务应用。脚本仅 Python 标准库。
-- 数据权限依据参赛者 2026-10-30 书面授权；B05-C 2026-10-30追加授权将单次详情页上限由50提高到150：仅公开/jobs/<uuid>和指定sitemap（最多4个jobs分片），robots.txt仅复检；串行间隔≥1.5s，禁/api/、登录、验证码绕过、并发、全站抓取及列表翻页；403/429或连续2次非200立即停，不重试。若站点条款与展示/再分发授权冲突，立即停下报告。
+- 数据权限依据参赛者 2026-10-30 书面授权；B05-C单次≤150详情、最多4个jobs分片、匿名串行≥1.5s。B05-E追加允许登录后访问（仅本人账号、仅岗位详情、仅参赛演示），授权来自参赛者而非站点；先同页匿名/带Cookie最多2请求比较，未证实增益不得登录批量。禁/api/、验证码绕过、并发、全站抓取及列表翻页，遇条款冲突立即报告。
+- B05-E凭据仅从data/private/session.json只读，禁止命令行传入、输出、日志或Git留存；台账只能记auth_mode及cookie哈希前8位。比较间隔≥2s；401/403/302或验证码/风控立即exit 4、不重试、不跟随跳转。不请求account/profile/resume/messages/applications或任何用户ID路径，不触发投递。登录数据不可称匿名公开数据。
 - 采集UA联系地址仅从本地CAREER_COMPASS_CONTACT读取，按参赛者追加确认仅用于HTTP请求；控制台及run台账UA中的邮箱脱敏，不进仓库或协作记录。B05-C先修解析、以10页验证，通过后可150页或50条合格即停；不导入processed。基准2026-10-30，截止≥2026-10-31才open，优选≥2026-11-07，报名开始恒unknown；采集合格不代表个人资格eligible。
 - 公开仓库仅可含结构化岗位数据及脱敏证据片段，不含整页 HTML 或个人联系方式。未知不等于不限，冲突入人工复核队列。
 - eligible 仅用于用户画像已确认、所有硬条件有证据通过；关键未知或冲突保持 unknown；任一明确不符为 ineligible。

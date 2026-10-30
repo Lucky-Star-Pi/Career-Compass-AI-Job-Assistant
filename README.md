@@ -4,7 +4,7 @@
 
 阶段一：记录、选型、数据契约与零依赖导入验证。尚无业务应用。
 
-冻结选型见 DECISIONS.md；数据政策见 DATA_SCOPE.md 和 data/GIT_POLICY.md。
+冻结选型见 docs/DECISIONS.md；数据政策见 docs/DATA_SCOPE.md 和 data/GIT_POLICY.md。
 单一校验入口：`python scripts/validate_data.py`（B03 建立）。
 
 原始记录 native 本地原样保存，未经人工审查不得推送。人工网页原文补存使用独立通道，不能以摘要替代。
