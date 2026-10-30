@@ -72,3 +72,7 @@
 参赛者本轮明确确认：缺公告时允许只保留真实详情引用并标缺失；不生成假的第二条source_ref。公告有值时source_refs保留详情与公告两条，二者均关联同岗证据TXT及其实际SHA256。导入器已保留这些引用，不会丢掉公告来源。
 
 输出固定status=unknown、profile_confirmed=false、is_fixture=false；human_verification=pending，表示结构/证据校验不等于独立来源核验或学生资格确认。所有合并与生产导入须人工另行确认。
+
+## B05-H URL清单追加通道
+
+H按本人清单另行授权抓详情，边界及命令见MANUAL_URL_GUIDE.md，不再抓列表或API。`--auto`接受固定10列FILL_ME，以编号覆盖28列auto。任何PENDING残留均拒绝；原PENDING留空仍保留PENDING。check-only不改证据、不写raw或processed。采集证据保留BATCH前三行并增加公告URL行，只有--auto合并模式额外接受该四行头。

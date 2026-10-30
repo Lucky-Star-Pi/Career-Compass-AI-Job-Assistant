@@ -14,5 +14,7 @@ agent-records/raw/native/*
 data/private/
 data/.tmp/
 data/raw/.collect.lock
+# Original human URL list may contain query credentials; canonical safe URLs are in run/CSV.
+data/raw/MANUAL_URLS.txt
 *.html
 *.htm

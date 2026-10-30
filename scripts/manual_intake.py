@@ -18,6 +18,11 @@ ORGANIZATIONS = {'央企', '国企', '事业单位', '民企', 'unknown'}
 PII = re.compile(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?<!\d)(?:\d{11}|\d{17}[\dXx])(?!\d)')
 MAPPING = dict(zip(COLUMNS, 'id name employer organization_type recruitment_type batch location source_url announcement_url application_url published_at application_start application_end education degree major graduation_time experience political_status certificates age other_restrictions condition_text evidence_excerpt open_status obtained_at raw_snapshot notes'.split()))
 CONDITIONS = 'education degree major graduation_time experience political_status certificates age other_restrictions'.split()
+FILL_COLUMNS = '编号,岗位名称,单位名称,详情页URL,公告URL,报名开始,报名截止,开放状态,单位性质,备注'.split(',')
+
+
+def pending(value):
+    return isinstance(value, str) and bool(re.search(r'(?i)(?<![A-Z0-9_])PENDING(?![A-Z0-9_])', value))
 
 
 def unknown(value):
@@ -53,19 +58,19 @@ def create_templates(root=ROOT):
         write_csv(manual, [])
 
 
-def read_input(path):
+def read_input(path, columns=COLUMNS):
     if not path.exists() or path.stat().st_size == 0:
         return [], []
     try:
         with path.open(encoding='utf-8-sig', newline='') as stream:
             reader = csv.DictReader(stream)
-            if reader.fieldnames != COLUMNS:
-                return [], ['CSV表头必须为固定28列且顺序一致']
+            if reader.fieldnames != columns:
+                return [], [f'CSV表头必须为固定{len(columns)}列且顺序一致']
             rows = []
-            for row in reader:
+            for record_number, row in enumerate(reader, 2):
                 if None not in row and all(isinstance(v, str) and not v.strip() for v in row.values()):
                     continue
-                rows.append((reader.line_num, row))
+                rows.append((record_number, row))
             return rows, []
     except (UnicodeError, csv.Error, OSError):
         return [], ['CSV不可读取或不是UTF-8，请另存为CSV UTF-8']
@@ -89,7 +94,7 @@ def validate_url(value, role):
         return False
 
 
-def check_row(raw, root):
+def check_row(raw, root, collected=False):
     errors = []
     if None in raw or any(raw.get(key) is None for key in COLUMNS):
         return None, ['CSV行列数与表头不符'], None
@@ -97,6 +102,9 @@ def check_row(raw, root):
     row = {key: raw[key] if key in ('条件原文', '证据引用') else raw[key].strip() for key in COLUMNS}
     if row['编号'].upper() == 'SAMPLE' or '示例' in row['备注']:
         return None, ['示例行必须删除'], None
+    remaining = [key for key, value in row.items() if pending(value)]
+    if remaining:
+        return None, ['PENDING未补：' + '、'.join(remaining)], None
     for key in HARD:
         if unknown(row[key]):
             errors.append('硬性字段缺失或unknown：' + key)
@@ -138,7 +146,8 @@ def check_row(raw, root):
             if unknown(row[key]) or row[key] not in text:
                 errors.append(key + '未在证据TXT逐字命中')
         expected_headers = [f'# 岗位名称：{row["岗位名称"]}', f'# 详情页URL：{row["详情页URL"]}', '# 公告URL：' + ('unknown' if unknown(row['公告URL']) else row['公告URL']), f'# 采集时间：{row["采集时间"]}']
-        if text.splitlines()[:4] != expected_headers:
+        collected_headers = [f'# 岗位名：{row["岗位名称"]}', f'# URL：{row["详情页URL"]}', f'# 获取时间：{row["采集时间"]}', '# 公告URL：' + ('unknown' if unknown(row['公告URL']) else row['公告URL'])]
+        if text.splitlines()[:4] != expected_headers and not (collected and text.splitlines()[:4] == collected_headers):
             errors.append('证据TXT四行头部须与CSV一致')
     if errors:
         return None, errors, path
@@ -175,7 +184,7 @@ def check_row(raw, root):
     return (None if errors else output), errors, path
 
 
-def evaluate(rows, root=ROOT):
+def evaluate(rows, root=ROOT, collected=False):
     results, records = [], []
     ids = Counter((row.get('编号') or '').strip().casefold() for _, row in rows)
     paths = []
@@ -188,7 +197,7 @@ def evaluate(rows, root=ROOT):
             paths.append(None)
     counts = Counter(path for path in paths if path is not None)
     for index, (line, row) in enumerate(rows):
-        record, errors, path = check_row(row, root)
+        record, errors, path = check_row(row, root, collected)
         ident = (row.get('编号') or '').strip().casefold()
         if ident and ids[ident] > 1:
             errors.append('编号重复')
@@ -198,6 +207,35 @@ def evaluate(rows, root=ROOT):
         if not errors:
             records.append(record)
     return records, results
+
+
+def merge_inputs(fill_path, auto_path):
+    automatic, errors = read_input(auto_path)
+    human, human_errors = read_input(fill_path, FILL_COLUMNS)
+    errors.extend(human_errors)
+    auto_map, human_map = {}, {}
+    for label, rows, mapping, columns in (('自动表', automatic, auto_map, COLUMNS), ('人工表', human, human_map, FILL_COLUMNS)):
+        for line, row in rows:
+            if None in row or any(row.get(key) is None for key in columns):
+                errors.append(f'{label}第{line}行列数不符')
+                continue
+            ident = row['编号'].strip().casefold()
+            if not ident or ident in mapping:
+                errors.append(f'{label}第{line}行编号为空或重复')
+                continue
+            mapping[ident] = (line, row)
+    if auto_map.keys() != human_map.keys():
+        errors.append('两表编号集合不一致：缺少或新增的行必须核对，不能静默丢弃')
+    merged = []
+    for ident, (line, original) in auto_map.items():
+        row = {key: ('PENDING' if not value.strip() else value) for key, value in original.items()}
+        if ident in human_map:
+            line, entered = human_map[ident]
+            for key in FILL_COLUMNS:
+                # Clearing a placeholder is NOT confirmation that the source omitted it.
+                row[key] = 'PENDING' if pending(row[key]) and not entered[key].strip() else entered[key]
+        merged.append((line, row))
+    return merged, errors
 
 
 def report_text(rows, records, results, structural):
@@ -224,9 +262,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', type=Path, default=ROOT / 'data/raw/MANUAL.csv')
     parser.add_argument('--check-only', action='store_true')
+    parser.add_argument('--auto', type=Path, help='merge a fixed 10-column FILL_ME over the matching 28-column auto CSV')
     args = parser.parse_args()
-    rows, structural = read_input(args.input)
-    records, results = evaluate(rows, ROOT)
+    rows, structural = merge_inputs(args.input, args.auto) if args.auto else read_input(args.input)
+    records, results = evaluate(rows, ROOT, collected=bool(args.auto))
     if not rows:
         print('0 行：尚无人工记录，不代表15条数据验收通过')
     for item in results:
