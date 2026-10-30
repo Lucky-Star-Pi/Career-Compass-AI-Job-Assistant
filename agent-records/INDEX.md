@@ -7,3 +7,4 @@
 底座提交：1de9e73。原生快照重开 153 行，哈希一致。隐私人工审查未完成；交付审查见 REDACTION.md，缺失见 MISSING.md。
 
 B02 文档与工单提交：76e8f97；原始工具执行将由本阶段末native快照覆盖，notes不是原始记录。
+B03 导入及机器闸门提交：774553c；实测摘要见notes/B03-verification.md。
