@@ -42,4 +42,4 @@ MODEL-CHANGE (2026-10-30): agent-records/raw/native/20261030-192543-MODEL-CHANGE
 
 ## B05-C 有限扩量与时间筛选
 
-2026-10-30追加授权原文在本聊天；实际过程见5份BATCH run.json及data/B05C_REPORT.md。41个不同详情、71请求，严格入选0；最终10页失败，未运行150。没有保存HTML、没有改动native或processed。上述报告是验收说明，不冒充原始对话；任务提交SHA在紧接收尾提交登记。
+2026-10-30追加授权原文在本聊天；实际过程见5份BATCH run.json及data/B05C_REPORT.md。41个不同详情、71请求，严格入选0；最终10页失败，未运行150。没有保存HTML、没有改动native或processed。上述报告是验收说明，不冒充原始对话；任务提交6e639cb；紧接收尾提交固化关联，本收尾自身SHA以Git历史定位。
