@@ -17,7 +17,7 @@ export async function requestJSON(request:CompletionRequest):Promise<unknown> {
   throw new SyntaxError('Missing model JSON');
 }
 
-export function validReply(value:unknown, candidates:Reference[]):value is {reply:string; references:Reference[]} {
+export function validReply(value:unknown, candidates:Reference[]):value is {reply:string; references:Reference[];profile_updates?:unknown} {
   if(!value||typeof value!=='object'||'status' in value)return false;
   const output=value as {reply?:unknown; references?:unknown};
   if(typeof output.reply!=='string'||!output.reply.trim()||output.reply.length>=300||/保证|一定|无需核实|包过|百分百|https?:\/\//i.test(output.reply))return false;

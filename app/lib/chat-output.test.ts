@@ -43,3 +43,4 @@ test('拒绝reply内URL、空回复、过长回复和超过5条引用',()=>{
 test('引用必须非空、属于候选集且ID和URL成对匹配',()=>{
   for(const refs of [[],[null],[{job_id:'OTHER',source_url:references[0].source_url}],[{job_id:references[0].job_id,source_url:references[1].source_url}]])assert.equal(validReply({...output,references:refs},references),false);
 });
+test('模型不得输出status，槽位建议不能替代规则判定',()=>{assert.equal(validReply({...output,status:'eligible'},references),false);assert.equal(validReply({...output,references:[{...references[0],status:'eligible'}]},references),false);});

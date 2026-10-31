@@ -38,3 +38,5 @@ cron每分钟巡检仓库版本并触发部署，不等同于独立HTTP健康探
 /opt/career/app/.env.local仅存DEEPSEEK_API_KEY和PROFILE_COOKIE_SECRET，权限600，不进入Git或Docker构建上下文。配置由参赛者本人负责，本文不读取、展示或复制密钥；稳定Cookie签名密钥用于重启后的画像一致性。
 
 参赛者已报告线上/api/health的data_count=10、persistent_cookie_secret=true，以及一次connected=true、约1.4秒的对话实测。该事实与本轮发布是否成功分开登记；本轮GitHub连接失败时继续使用先前线上版本，不能依据既有健康结果宣称新提交已上线。
+
+第四轮账号存储：默认/opt/career-data（可用USER_DATA_DIR指定应用目录外路径），users.json仅保存scrypt盐和哈希，profiles/<userId>.json保存该账号画像、私有简历与最近20条消息。运行时自动建目录，文件模式600、目录700；单进程写锁与临时文件rename用于原子替换。该目录不在rsync应用路径内；不要把它拷入源码或部署日志。公开demo为共享体验账号。

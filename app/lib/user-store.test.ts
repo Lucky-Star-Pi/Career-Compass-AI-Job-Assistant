@@ -20,5 +20,9 @@ test('账号持久化、并发注册、用户隔离、20条历史及会话防篡
   assert.equal(session.sameOrigin(new Request('http://localhost:3114/api/auth/login',{headers:{host:'127.0.0.1:3114',origin:'http://127.0.0.1:3114'}})),true);
   assert.equal(session.sameOrigin(new Request('http://localhost:3114/api/auth/login',{headers:{host:'127.0.0.1:3114',origin:'https://example.invalid'}})),false);
   assert.equal(store.validCredentials('../user',password),false);
+  const resume='以下是合成简历要点，仅用于隔离测试。';await store.updateData(a.userId,data=>{data.resume=resume;});
+  await store.updateData(a.userId,data=>{data.resume=null;});
+  await store.appendTurn(a.userId,resume,{reply:'请确认求职条件',references:[],model_status:'测试桩'},{redactQuestion:true});
+  const afterDelete=await store.getData(a.userId);assert.equal(afterDelete.resume,null);assert.ok(!JSON.stringify(afterDelete.messages).includes(resume));
  }finally{assert.ok(root.startsWith(base+sep));await rm(root,{recursive:true,force:true});}
 });
