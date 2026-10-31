@@ -78,3 +78,18 @@ A：53939a2；B：f56c971；C：0cad7c5；D：本节所在提交（由Git历史�
 | app/.dockerignore | CONTAINER-BUILD | 2026-10-31T10:01:08+08:00 | 本条所在提交 | e96ac69d8a19bf70ae4e0dc3a8744c66110f2a919cccead594f8240a79950e82 | verification-note |
 | app/package.json | CONTAINER-BUILD | 2026-10-31T10:01:08+08:00 | 本条所在提交 | dd8c73335fca777c11f0660231a60943830041fafabd065b5c63e87ee40abb81 | verification-note |
 | app/README.md | CONTAINER-BUILD | 2026-10-31T10:01:08+08:00 | 本条所在提交 | afb8fae548b5939e6101379cbfdc53230b0c224fbdb172605fdabb2d73abf9c4 | verification-note |
+
+## 2026-10-31 状态同步与提交材料
+
+采用审阅方确认的实现和本人核对数据：UI提交0601c8a、10条核对标记提交8f2deb3；文案提交53d3c4c。两份jobs.json已转LF且字节相同；来源核对不等于个人资格eligible。P0-1提交前diff仅五个指定文件；此后文案与材料独立提交。按参赛者要求不重复其已验证的测试/构建/线上对话。
+
+GitHub:443直连push在本次执行环境多次失败，包含参赛者报告网络恢复后的重试；未因此改系统代理/hosts/服务器文件，未把本地SHA写成已发布线上SHA。后续若push成功，以实际工具结果及站点文案核验追加记录。
+
+| 文件 | 任务 | 记录时间 | 关联提交 | SHA256 | export_method |
+|---|---|---|---|---|---|
+| README.md | P0-3 | 2026-10-31T11:43:18+08:00 | 本材料提交（Git历史定位） | ceb43ad5b6cc13625171792f227915e9153a3ee1e6b991e1ddcac35c6d70502a | verification-note |
+| docs/SUBMISSION.md | P0-3 | 2026-10-31T11:43:18+08:00 | 本材料提交（Git历史定位） | 65f391fdb16a5f5a4f306099df34be4ee475653d7c4dd2fa79cbc5a8504eccee | verification-note |
+| docs/OPS.md | P0-3 | 2026-10-31T11:43:18+08:00 | 本材料提交（Git历史定位） | b66303e0ae334e034041d8c6122bc248553fec75e5836347396dec7621cee7a2 | verification-note |
+| TIMELOG.csv | P0-3 | 2026-10-31T11:43:18+08:00 | 本材料提交（Git历史定位） | ff3e34796658e0e27d8ac5cec67101ea13730ca60a0067393990fbfa453a4251 | verification-note |
+
+以上为提交材料/验收索引，不是协作原始记录。本轮未读取、复制或修改native原件，四份原件仍未随仓库交付；脱敏副本也未制作。阶段窗口仅记录在TIMELOG备注，未观测时长未补造。

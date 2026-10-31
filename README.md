@@ -1,8 +1,28 @@
-# 职点迷津 AI 求职助手
+# 职点迷津 · AI 求职助手
+
+## 在线访问
+
+[http://118.89.79.239:3000](http://118.89.79.239:3000)
+
+无需登录。当前样本10条，采集于2026-10-30，全部来自职点迷津公开岗位页；每条附来源URL、获取时间与证据原文。页面上的开放声明不代表个人报名资格通过。
+
+## 目录
+
+- [docs/SUBMISSION.md](docs/SUBMISSION.md) —— 提交说明（可信性、工时、未完成项）
+- [docs/OPS.md](docs/OPS.md) —— 当前实际部署与运维
+- [docs/DECISIONS.md](docs/DECISIONS.md) —— 早期技术选型，实际部署变更见OPS
+- [docs/DATA_SCOPE.md](docs/DATA_SCOPE.md) —— 数据权限边界
+- [data/processed/jobs.json](data/processed/jobs.json) —— 10条结构化岗位；逐条evidence_hash为证据TXT的SHA256
+- [data/raw/MANUAL-20261030-220241.pages/](data/raw/MANUAL-20261030-220241.pages/) —— 10份证据原文
+- [agent-records/native-manifest.jsonl](agent-records/native-manifest.jsonl) —— 原始协作记录哈希清单；原件未随仓库交付
+- [app/](app/) —— Next.js应用
+- [scripts/](scripts/) —— 采集、校验、导入脚本（Python标准库）
+
+## 本地开发与历史阶段记录
 
 一个属于自己的 AI 求职助手网站，帮助大学生寻找央国企岗位。
 
-夜间 A→D：10条真实来源候选已导入；本地 Next.js 应用骨架已建立，尚未部署。
+2026-10-30夜间A→D历史状态：10条真实来源候选导入，本地应用骨架建立；当时尚未部署。当前部署以OPS为准。
 
 本地启动：`npm run build --prefix app`、`npm start --prefix app`，打开 `http://127.0.0.1:3000`。使用与限制见 [应用说明](app/README.md)，验收结果见 [夜间状态](OVERNIGHT_STATUS.md)。
 
