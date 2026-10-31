@@ -72,6 +72,7 @@ def main():
         resume = '以下是我的简历要点：学历本科；专业国际商务类；2027届毕业；意向地区湛江。\n' + '合成项目经历：参与校园业务分析，整理需求文档并复核交付依据。' * 10
         assert len(resume) > 200
         status, resume_answer = call(first, '/api/chat', {'question': resume})
+        print('C resume response:', json.dumps({'HTTP': status, 'model_status': resume_answer.get('model_status'), 'resume_received': resume_answer.get('resume_received'), 'slot_keys': list(resume_answer.get('profile_updates') or {}), 'dropped_fields': resume_answer.get('dropped_fields')}, ensure_ascii=False), flush=True)
         assert status == 200 and resume_answer.get('resume_received') is True and resume_answer.get('profile_updates')
         data = call(first, '/api/profile')[1]
         assert data['hasResume'] is True and 'resume' not in data
