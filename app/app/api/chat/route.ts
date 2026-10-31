@@ -2,7 +2,7 @@ import jobs from '../../../lib/jobs.json';
 import type {Job,Profile} from '../../../lib/match';
 import {currentUser,sameOrigin} from '../../../lib/session';
 import {getData,appendTurn,updateData} from '../../../lib/user-store';
-import {validReply,type Reference} from '../../../lib/chat-output';
+import {validReply,hasRecommendationClaim,type Reference} from '../../../lib/chat-output';
 import {filterProfileUpdates,explicitResumeSlots,EDUCATION,MAJOR,CITY,YEAR,CERT} from '../../../lib/slots';
 import {isResumeContent,forModel,containsResumeEcho} from '../../../lib/resume';
 import {modelTiers,modeLabel,type Mode} from '../../../lib/model-tiers';
@@ -32,8 +32,8 @@ export async function POST(request:Request){
   {role:'user',content:JSON.stringify({question:forModel(input),profile:stored.profile,evidence,history:stored.messages.slice(-20).map(({role,content})=>({role,content})),resume_context:forModel(resumeReceived?input:stored.resume||'').slice(0,6000)})}
  ],accept:(value)=>{
   if(!validReply(value,references)||pii.test(value.reply)||(resumeReceived&&containsResumeEcho(value.reply,input)))return false;
-  if(/可报名|可以报|直接报名|符合全部报名条件/.test(value.reply))return false;
-  if(/推荐|已载明条件全部符合/.test(value.reply)&&value.references.some(ref=>!evidence.find(e=>e.id===ref.job_id)?.policy.canRecommend))return false;
+  if(/直接报名|符合全部报名条件|确保录取/.test(value.reply))return false;
+  if(hasRecommendationClaim(value.reply)&&value.references.some(ref=>!evidence.find(e=>e.id===ref.job_id)?.policy.canRecommend))return false;
   return true;
  }});
  const output=tier?.output as Output|undefined;

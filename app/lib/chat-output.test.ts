@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {requestJSON,validReply} from './chat-output.ts';
+import {requestJSON,validReply,hasRecommendationClaim} from './chat-output.ts';
 const references=[{job_id:'TEST-A',source_url:'https://example.invalid/a'},{job_id:'TEST-B',source_url:'https://example.invalid/b'}];
 const output={reply:'符合学历条件；个人资格待核实，暂不能确认可报名。',references:[references[0]]};
 
@@ -32,15 +32,21 @@ test('HTTP或网络错误不在JSON重试范围',async()=>{
   await assert.rejects(requestJSON(async()=>{calls++;throw new Error('HTTP failure');}));
   assert.equal(calls,1);
 });
-test('允许符合、不符合、待核实和可报名，仍拒绝承诺禁词',()=>{
+test('中性与需核对语境放行，仅拦实际承诺',()=>{
   assert.equal(validReply(output,references),true);
-  for(const phrase of ['保证','一定','无需核实','包过','百分百'])assert.equal(validReply({...output,reply:phrase},references),false);
+  for(const reply of ['校招时间不一定相同，需核对公告。','保证信息来源可追溯。','是否可以报需核对原公告。','不具备明确条件时不能确认可报名。','无需核实'])assert.equal(validReply({...output,reply},references),true);
+  for(const reply of ['保证'+'能报','确保顺利报名','百分百录取','一定'+'能报','一定可以录用','无需核对','包过'])assert.equal(validReply({...output,reply},references),false);
 });
 test('拒绝reply内URL、空回复、过长回复和超过5条引用',()=>{
   for(const reply of ['https://example.invalid/a','HTTP://example.invalid/a','   ','字'.repeat(300)])assert.equal(validReply({...output,reply},references),false);
   assert.equal(validReply({...output,references:Array(6).fill(references[0])},references),false);
 });
-test('引用必须非空、属于候选集且ID和URL成对匹配',()=>{
-  for(const refs of [[],[null],[{job_id:'OTHER',source_url:references[0].source_url}],[{job_id:references[0].job_id,source_url:references[1].source_url}]])assert.equal(validReply({...output,references:refs},references),false);
+test('通用回答可空引用，有引用时必须属于候选且ID与URL成对',()=>{
+  assert.equal(validReply({...output,references:[]},references),true);
+  for(const refs of [undefined,null,{},[null],[{job_id:'OTHER',source_url:references[0].source_url}],[{job_id:references[0].job_id,source_url:references[1].source_url}]])assert.equal(validReply({...output,references:refs},references),false);
 });
 test('模型不得输出status，槽位建议不能替代规则判定',()=>{assert.equal(validReply({...output,status:'eligible'},references),false);assert.equal(validReply({...output,references:[{...references[0],status:'eligible'}]},references),false);});
+test('否定推荐不是推荐承诺，混合回复中的正向推荐仍需规则核对',()=>{
+  for(const reply of ['尚无法推荐岗位，请先确认条件。','暂不能直接推荐，需核对。','不宜为你推荐该岗。'])assert.equal(hasRecommendationClaim(reply),false);
+  for(const reply of ['推荐该岗位。','不推荐甲，但推荐乙。','已载明条件全部符合。'])assert.equal(hasRecommendationClaim(reply),true);
+});

@@ -15,7 +15,7 @@
 
 1. **数据可追溯。** 每条包含source_url、obtained_at、raw_snapshot、evidence_hash，可定位到[10份证据TXT](../data/raw/MANUAL-20261030-220241.pages/)并重算SHA256。[结构化数据](../data/processed/jobs.json)保留来源与条件原文；哈希证明提交证据的一致性，不证明招聘方此刻仍开放。
 2. **判定与解释分离。** 三态由[规则函数](../app/lib/match.ts)计算，画像未确认为unknown、任一明确不符为ineligible、关键未知保持unknown。AI负责解释，卡片判定不由生成文本改写；分项计数聚合已有checks，来源核对不计作个人条件通过。
-3. **回答有引用且服务端校验。** [chat-output.ts](../app/lib/chat-output.ts)检查引用非空、ID与URL成对匹配且属于候选集，并拒绝reply内URL和承诺用语。第七轮改为DeepSeek（15秒）→可选Qwen（10秒）→规则，JSON截断或引用不合格进入下一级；这些闸门不能证明所有自然语言结论正确。
+3. **回答有引用且服务端校验。** [chat-output.ts](../app/lib/chat-output.ts)允许通用问题引用为空；有引用时检查ID与URL成对匹配且属于候选集，并拒绝reply内URL和承诺用语。第七轮改为DeepSeek（15秒）→可选Qwen（10秒）→规则，JSON截断或引用不合格进入下一级；这些闸门不能证明所有自然语言结论正确。
 4. **不编造缺失条件。** 没有可用候选或引用无效时不输出成功的岗位推荐，走降级提示；当前无匹配原因未细分。[数据契约](../data/CONTRACT.md)规定页面未写保留unknown，绝不将缺失改写成“不限”；原文明示的长期招聘保留原句，不伪造截止日期。
 5. **评委可逐项复核。** 可展开卡片“查看证据”并打开来源链接，对照来源、获取时间、原文与规则解释。[校验入口](../scripts/validate_data.py)及[规则测试](../app/lib/match.test.ts)提供机器检查，已知局限与原始记录缺失在本说明披露，复核不依赖模型自行给出的可信度分数。
 

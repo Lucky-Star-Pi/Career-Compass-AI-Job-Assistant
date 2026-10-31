@@ -37,4 +37,4 @@ test('截断/非法JSON跳过；未配Qwen/预算耗尽/双失败返回规则层
 });
 test('本机PDF输入边界：仅pdf、最大5MB、5页/6000字上限',()=>{assert.equal(pdfInputError({name:'synthetic.pdf',size:PDF_LIMITS.bytes}),null);assert.match(pdfInputError({name:'synthetic.pdf',size:PDF_LIMITS.bytes+1})!,/5MB/);assert.match(pdfInputError({name:'synthetic.doc',size:1})!,/PDF/);assert.equal(PDF_LIMITS.pages,5);assert.equal(PDF_LIMITS.characters,6000);});
 test('本地保守槽位只接收明确枚举且拒绝歧义',()=>{assert.deepEqual(explicitResumeSlots('本科 国际商务类 2027届 湛江 CET-4 C1驾驶证'),{education:'本科',major:'国际商务类',city:'湛江市',graduationYear:2027,certificates:['CET-4','C1驾驶证']});const conflict=explicitResumeSlots('本科经历 硕士在读 2027届 2028届');assert.equal(conflict.education,undefined);assert.equal(conflict.graduationYear,undefined);assert.deepEqual(explicitResumeSlots('合成材料，没有明确求职条件'),{});});
-test('回复承诺与模型自带status仍拒绝',()=>{assert.equal(validReply({...good,reply:'\u4f60\u53ef\u4ee5\u62a5\u540d'},[ref]),false);assert.equal(validReply({...good,status:'eligible'},[ref]),false);});
+test('回复承诺与模型自带status仍拒绝',()=>{assert.equal(validReply({...good,reply:'保证'+'能报'},[ref]),false);assert.equal(validReply({...good,status:'eligible'},[ref]),false);});

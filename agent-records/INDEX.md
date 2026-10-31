@@ -120,3 +120,7 @@ C在途已由402b399保存并push，本轮起点干净。R6本地实际结果见
 ## 第七轮小职验收
 
 记录时间：2026-10-31T14:16:52+08:00；任务R7-XIAOZHI；文件docs/reports/R7_REPORT.md；SHA256=9d0d73a47a57eb4d65851a86b822038d3f1a9ac416718f67906923ac9d0af18f；export_method=verification-note；关联本轮功能提交（自身SHA由Git历史定位）。构建、35测试、账号/数据回归、错误Key转规则及浏览器合成PDF/气泡验收通过；Qwen成功层仅模拟验证，未称真实调用。原始native未读取或变更，截图/合成运行数据仅本地忽略区；本段不替代原始协作记录。
+
+## 回答校验误杀修复
+
+记录时间：2026-10-31T14:35:02+08:00；任务REPLY-GUARD；文件docs/reports/REPLY_GUARD_REPORT.md；SHA256=ed95a2d258fb9cebfb1bd5b293b229112814b7e51cd2cf2aa715f75209dc3986；export_method=verification-note；关联本轮fix提交（自身SHA由Git历史定位）。36测试/build/类型/10条数据校验通过，三条真实DeepSeek请求和错误Key转rules通过；首次问题3仍降级已如实记载。原件未读取或修改；此材料不是原始对话导出，线上验收以后续90秒工具结果为准。
