@@ -59,3 +59,10 @@ export function match(profile:Profile, job:Job, asOf?:string) {
   if(checks.some(x=>x.result==='unknown'))return finish('unknown');
   return finish('eligible');
 }
+
+export function summarize(checks:Check[]){
+  const meta=new Set(['profile_confirmation','source_review','location']);
+  let pass=0,unknown=0,fail=0;
+  for(const c of checks){if(meta.has(c.field))continue;if(c.result==='pass')pass++;else if(c.result==='fail')fail++;else unknown++;}
+  return {pass,unknown,fail};
+}
