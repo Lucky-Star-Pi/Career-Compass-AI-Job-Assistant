@@ -5,7 +5,7 @@
     "organization_type": "国企",
     "announcement_url": "unknown",
     "application_url": "unknown",
-    "last_verified_at": "unknown",
+    "last_verified_at": "2026-10-31T11:35:00+08:00",
     "published_at": {
       "raw": "2026-10-28",
       "normalized": "2026-10-28",
@@ -93,8 +93,9 @@
     "conflicts": [],
     "evaluations": [],
     "human_verification": {
-      "state": "pending",
-      "verified_at": "unknown",
+      "state": "verified",
+      "verified_at": "2026-10-31T11:35:00+08:00",
+      "verified_by": "contestant",
       "evidence_refs": [
         "data/raw/MANUAL-20261030-220241.pages/01.evidence.txt"
       ]
@@ -148,7 +149,6 @@
       "degree",
       "experience",
       "graduation_time",
-      "last_verified_at",
       "notes",
       "other_restrictions",
       "political_status",
@@ -162,7 +162,7 @@
     "organization_type": "国企",
     "announcement_url": "https://xyz.51job.com/external/apply.aspx?jobid=173530159&ctmid=6388793",
     "application_url": "unknown",
-    "last_verified_at": "unknown",
+    "last_verified_at": "2026-10-31T11:35:00+08:00",
     "published_at": {
       "raw": "2026-10-28",
       "normalized": "2026-10-28",
@@ -230,8 +230,9 @@
     "conflicts": [],
     "evaluations": [],
     "human_verification": {
-      "state": "pending",
-      "verified_at": "unknown",
+      "state": "verified",
+      "verified_at": "2026-10-31T11:35:00+08:00",
+      "verified_by": "contestant",
       "evidence_refs": [
         "data/raw/MANUAL-20261030-220241.pages/02.evidence.txt"
       ]
@@ -286,7 +287,6 @@
       "degree",
       "experience",
       "graduation_time",
-      "last_verified_at",
       "major",
       "notes",
       "other_restrictions",
@@ -301,7 +301,7 @@
     "organization_type": "国企",
     "announcement_url": "https://xyz.51job.com/external/apply.aspx?jobid=173526355&ctmid=6388793",
     "application_url": "unknown",
-    "last_verified_at": "unknown",
+    "last_verified_at": "2026-10-31T11:35:00+08:00",
     "published_at": {
       "raw": "2026-10-28",
       "normalized": "2026-10-28",
@@ -369,8 +369,9 @@
     "conflicts": [],
     "evaluations": [],
     "human_verification": {
-      "state": "pending",
-      "verified_at": "unknown",
+      "state": "verified",
+      "verified_at": "2026-10-31T11:35:00+08:00",
+      "verified_by": "contestant",
       "evidence_refs": [
         "data/raw/MANUAL-20261030-220241.pages/03.evidence.txt"
       ]
@@ -425,7 +426,6 @@
       "degree",
       "experience",
       "graduation_time",
-      "last_verified_at",
       "major",
       "notes",
       "other_restrictions",
@@ -440,7 +440,7 @@
     "organization_type": "国企",
     "announcement_url": "https://xyz.51job.com/external/apply.aspx?jobid=173535397&ctmid=6388793",
     "application_url": "unknown",
-    "last_verified_at": "unknown",
+    "last_verified_at": "2026-10-31T11:35:00+08:00",
     "published_at": {
       "raw": "2026-10-28",
       "normalized": "2026-10-28",
@@ -508,8 +508,9 @@
     "conflicts": [],
     "evaluations": [],
     "human_verification": {
-      "state": "pending",
-      "verified_at": "unknown",
+      "state": "verified",
+      "verified_at": "2026-10-31T11:35:00+08:00",
+      "verified_by": "contestant",
       "evidence_refs": [
         "data/raw/MANUAL-20261030-220241.pages/04.evidence.txt"
       ]
@@ -564,7 +565,6 @@
       "degree",
       "experience",
       "graduation_time",
-      "last_verified_at",
       "major",
       "notes",
       "other_restrictions",
@@ -579,7 +579,7 @@
     "organization_type": "国企",
     "announcement_url": "https://xyz.51job.com/external/apply.aspx?jobid=173531221&ctmid=6388793",
     "application_url": "unknown",
-    "last_verified_at": "unknown",
+    "last_verified_at": "2026-10-31T11:35:00+08:00",
     "published_at": {
       "raw": "2026-10-28",
       "normalized": "2026-10-28",
@@ -647,8 +647,9 @@
     "conflicts": [],
     "evaluations": [],
     "human_verification": {
-      "state": "pending",
-      "verified_at": "unknown",
+      "state": "verified",
+      "verified_at": "2026-10-31T11:35:00+08:00",
+      "verified_by": "contestant",
       "evidence_refs": [
         "data/raw/MANUAL-20261030-220241.pages/05.evidence.txt"
       ]
@@ -703,7 +704,6 @@
       "degree",
       "experience",
       "graduation_time",
-      "last_verified_at",
       "major",
       "notes",
       "other_restrictions",
@@ -718,7 +718,7 @@
     "organization_type": "国企",
     "announcement_url": "https://xyz.51job.com/external/apply.aspx?jobid=173532015&ctmid=6388793",
     "application_url": "unknown",
-    "last_verified_at": "unknown",
+    "last_verified_at": "2026-10-31T11:35:00+08:00",
     "published_at": {
       "raw": "2026-10-28",
       "normalized": "2026-10-28",
@@ -786,8 +786,9 @@
     "conflicts": [],
     "evaluations": [],
     "human_verification": {
-      "state": "pending",
-      "verified_at": "unknown",
+      "state": "verified",
+      "verified_at": "2026-10-31T11:35:00+08:00",
+      "verified_by": "contestant",
       "evidence_refs": [
         "data/raw/MANUAL-20261030-220241.pages/06.evidence.txt"
       ]
@@ -842,7 +843,6 @@
       "degree",
       "experience",
       "graduation_time",
-      "last_verified_at",
       "major",
       "notes",
       "other_restrictions",
@@ -857,7 +857,7 @@
     "organization_type": "国企",
     "announcement_url": "https://xyz.51job.com/external/apply.aspx?jobid=173534744&ctmid=6388793",
     "application_url": "unknown",
-    "last_verified_at": "unknown",
+    "last_verified_at": "2026-10-31T11:35:00+08:00",
     "published_at": {
       "raw": "2026-10-28",
       "normalized": "2026-10-28",
@@ -925,8 +925,9 @@
     "conflicts": [],
     "evaluations": [],
     "human_verification": {
-      "state": "pending",
-      "verified_at": "unknown",
+      "state": "verified",
+      "verified_at": "2026-10-31T11:35:00+08:00",
+      "verified_by": "contestant",
       "evidence_refs": [
         "data/raw/MANUAL-20261030-220241.pages/07.evidence.txt"
       ]
@@ -981,7 +982,6 @@
       "degree",
       "experience",
       "graduation_time",
-      "last_verified_at",
       "major",
       "notes",
       "other_restrictions",
@@ -996,7 +996,7 @@
     "organization_type": "国企",
     "announcement_url": "https://xyz.51job.com/external/apply.aspx?jobid=173527078&ctmid=6388793",
     "application_url": "unknown",
-    "last_verified_at": "unknown",
+    "last_verified_at": "2026-10-31T11:35:00+08:00",
     "published_at": {
       "raw": "2026-10-28",
       "normalized": "2026-10-28",
@@ -1064,8 +1064,9 @@
     "conflicts": [],
     "evaluations": [],
     "human_verification": {
-      "state": "pending",
-      "verified_at": "unknown",
+      "state": "verified",
+      "verified_at": "2026-10-31T11:35:00+08:00",
+      "verified_by": "contestant",
       "evidence_refs": [
         "data/raw/MANUAL-20261030-220241.pages/08.evidence.txt"
       ]
@@ -1120,7 +1121,6 @@
       "degree",
       "experience",
       "graduation_time",
-      "last_verified_at",
       "major",
       "notes",
       "other_restrictions",
@@ -1135,7 +1135,7 @@
     "organization_type": "国企",
     "announcement_url": "https://xyz.51job.com/external/apply.aspx?jobid=173531902&ctmid=6388793",
     "application_url": "unknown",
-    "last_verified_at": "unknown",
+    "last_verified_at": "2026-10-31T11:35:00+08:00",
     "published_at": {
       "raw": "2026-10-28",
       "normalized": "2026-10-28",
@@ -1203,8 +1203,9 @@
     "conflicts": [],
     "evaluations": [],
     "human_verification": {
-      "state": "pending",
-      "verified_at": "unknown",
+      "state": "verified",
+      "verified_at": "2026-10-31T11:35:00+08:00",
+      "verified_by": "contestant",
       "evidence_refs": [
         "data/raw/MANUAL-20261030-220241.pages/09.evidence.txt"
       ]
@@ -1259,7 +1260,6 @@
       "degree",
       "experience",
       "graduation_time",
-      "last_verified_at",
       "major",
       "notes",
       "other_restrictions",
@@ -1274,7 +1274,7 @@
     "organization_type": "国企",
     "announcement_url": "https://xyz.51job.com/external/apply.aspx?jobid=173535293&ctmid=6388793",
     "application_url": "unknown",
-    "last_verified_at": "unknown",
+    "last_verified_at": "2026-10-31T11:35:00+08:00",
     "published_at": {
       "raw": "2026-10-28",
       "normalized": "2026-10-28",
@@ -1342,8 +1342,9 @@
     "conflicts": [],
     "evaluations": [],
     "human_verification": {
-      "state": "pending",
-      "verified_at": "unknown",
+      "state": "verified",
+      "verified_at": "2026-10-31T11:35:00+08:00",
+      "verified_by": "contestant",
       "evidence_refs": [
         "data/raw/MANUAL-20261030-220241.pages/10.evidence.txt"
       ]
@@ -1398,7 +1399,6 @@
       "degree",
       "experience",
       "graduation_time",
-      "last_verified_at",
       "major",
       "notes",
       "other_restrictions",
