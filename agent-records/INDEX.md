@@ -132,3 +132,7 @@ C在途已由402b399保存并push，本轮起点干净。R6本地实际结果见
 ## 编辑区滚动与焦点
 
 记录时间：2026-10-31T15:10:32+08:00；任务EDITOR-SCROLL；文件docs/reports/EDITOR_SCROLL_REPORT.md；SHA256=334c0780742fef92c6bec3e4f4dcb407185af078da67b9fba05ce060aa89369f；export_method=verification-note；关联本轮fix提交（自身SHA由Git历史定位）。38测试/构建通过，合成20消息浏览器实际验证两入口滚动、学历焦点及消息updates带入；模型Key禁用，原件未读改。线上结果以后续90秒工具检查为准。
+
+## 八例离线规则评测
+
+记录时间：2026-10-31T15:20:23+08:00；任务OFFLINE-EVAL；文件eval/RESULT.md；SHA256=207d264452f82974d106e8872f7686ae1fd0e17ae9e0bca7e3033b6012423f75；export_method=verification-note；关联本轮test提交（自身SHA由Git历史定位）。8/8一致，已判定3/3，unknown5/8；8例覆盖4个真实岗位，无eligible正例，不含模型质量。运行全离线、无依赖、无业务或数据修改，不读改native。

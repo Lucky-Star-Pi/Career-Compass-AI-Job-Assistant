@@ -1,0 +1,102 @@
+[
+  {
+    "id": "E1",
+    "job_id": "MANUAL-20261030-220241-01",
+    "profile": {
+      "confirmed": true,
+      "education": "大专"
+    },
+    "as_of": "2026-10-31",
+    "expect": "ineligible",
+    "note": "仅学历已确认，专业未提供；明确学历不符优先于专业未知。"
+  },
+  {
+    "id": "E2",
+    "job_id": "MANUAL-20261030-220241-03",
+    "profile": {
+      "confirmed": true,
+      "education": "本科",
+      "major": "国际商务类",
+      "graduationYear": 2027
+    },
+    "as_of": "2026-10-31",
+    "expect": "ineligible",
+    "note": "本科与03硕士要求不符。"
+  },
+  {
+    "id": "E3",
+    "job_id": "MANUAL-20261030-220241-03",
+    "profile": {
+      "confirmed": true,
+      "education": "硕士",
+      "major": "国际商务类",
+      "graduationYear": 2027
+    },
+    "as_of": "2026-10-31",
+    "expect": "unknown",
+    "note": "学历相同不代表资格通过，原文专业与附加限制仍有缺口。"
+  },
+  {
+    "id": "E4",
+    "job_id": "MANUAL-20261030-220241-01",
+    "profile": {
+      "confirmed": true,
+      "education": "本科",
+      "major": "国际商务类",
+      "graduationYear": 2027,
+      "city": "湛江市"
+    },
+    "as_of": "2026-10-31",
+    "expect": "unknown",
+    "note": "地点偏好及学历专业相符，届别、证书等仍需核对。"
+  },
+  {
+    "id": "E5",
+    "job_id": "MANUAL-20261030-220241-08",
+    "profile": {
+      "confirmed": true,
+      "education": "本科",
+      "major": "计算机类",
+      "graduationYear": 2027
+    },
+    "as_of": "2026-10-31",
+    "expect": "unknown",
+    "note": "专业原文未载明，不能自行视为符合。"
+  },
+  {
+    "id": "E6",
+    "job_id": "MANUAL-20261030-220241-01",
+    "profile": {
+      "confirmed": false
+    },
+    "as_of": "2026-10-31",
+    "expect": "unknown",
+    "note": "画像未确认，一律unknown。"
+  },
+  {
+    "id": "E7",
+    "job_id": "MANUAL-20261030-220241-01",
+    "profile": {
+      "confirmed": true,
+      "education": "本科",
+      "major": "国际商务类",
+      "graduationYear": 2027
+    },
+    "as_of": "2027-02-01",
+    "expect": "ineligible",
+    "note": "评测日期晚于明确截止2027-01-25。"
+  },
+  {
+    "id": "E8",
+    "job_id": "MANUAL-20261030-220241-02",
+    "profile": {
+      "confirmed": true,
+      "education": "本科",
+      "major": "经济与贸易类",
+      "graduationYear": 2027
+    },
+    "as_of": "2026-10-31",
+    "expect": "unknown",
+    "note": "学历和届别不替代专业与附加条件核验。"
+  }
+]
