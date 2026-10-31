@@ -1,0 +1,10 @@
+import {createHmac,randomBytes,timingSafeEqual} from 'node:crypto';
+import {findUser,type PublicUser} from './user-store.ts';
+const globalSecret=globalThis as typeof globalThis & {__careerSecret?:string};
+const secret=process.env.PROFILE_COOKIE_SECRET||(globalSecret.__careerSecret??=randomBytes(32).toString('hex'));
+export function signSession(user:PublicUser){const payload=Buffer.from(JSON.stringify({...user,exp:Date.now()+7*24*3600_000})).toString('base64url');return payload+'.'+createHmac('sha256',secret).update(payload).digest('base64url');}
+export function verifySession(token?:string):PublicUser|null{try{if(!token||token.length>2048)return null;const parts=token.split('.');if(parts.length!==2)return null;const [payload,sig]=parts;const actual=Buffer.from(sig,'base64url');const expected=createHmac('sha256',secret).update(payload).digest();if(actual.length!==expected.length||!timingSafeEqual(actual,expected))return null;const user=JSON.parse(Buffer.from(payload,'base64url').toString());if(!Number.isFinite(user.exp)||user.exp<=Date.now()||typeof user.userId!=='string'||typeof user.username!=='string')return null;return {userId:user.userId,username:user.username};}catch{return null;}}
+export async function userFromToken(token?:string){const claimed=verifySession(token);if(!claimed)return null;const user=await findUser(claimed.userId);return user?.username===claimed.username?user:null;}
+export function currentUser(request:Request){const token=request.headers.get('cookie')?.split(';').map(s=>s.trim()).find(s=>s.startsWith('cc_session='))?.slice(11);return userFromToken(token);}
+export function sessionCookie(request:Request,value:string,clear=false){return `cc_session=${value}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${clear?0:604800}${new URL(request.url).protocol==='https:'?'; Secure':''}`;}
+export function sameOrigin(request:Request){const origin=request.headers.get('origin');return !origin||origin===new URL(request.url).origin;}
