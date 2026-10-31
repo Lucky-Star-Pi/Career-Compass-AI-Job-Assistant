@@ -7,4 +7,4 @@ export function verifySession(token?:string):PublicUser|null{try{if(!token||toke
 export async function userFromToken(token?:string){const claimed=verifySession(token);if(!claimed)return null;const user=await findUser(claimed.userId);return user?.username===claimed.username?user:null;}
 export function currentUser(request:Request){const token=request.headers.get('cookie')?.split(';').map(s=>s.trim()).find(s=>s.startsWith('cc_session='))?.slice(11);return userFromToken(token);}
 export function sessionCookie(request:Request,value:string,clear=false){return `cc_session=${value}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${clear?0:604800}${new URL(request.url).protocol==='https:'?'; Secure':''}`;}
-export function sameOrigin(request:Request){const origin=request.headers.get('origin');return !origin||origin===new URL(request.url).origin;}
+export function sameOrigin(request:Request){const origin=request.headers.get('origin');if(!origin)return true;try{const url=new URL(origin);return ['http:','https:'].includes(url.protocol)&&url.host===(request.headers.get('host')||new URL(request.url).host);}catch{return false;}}

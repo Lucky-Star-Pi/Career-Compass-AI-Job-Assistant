@@ -17,6 +17,8 @@ test('账号持久化、并发注册、用户隔离、20条历史及会话防篡
   assert.equal((await store.getData(a.userId)).messages.length,20);assert.equal((await store.getData(b.userId)).messages.length,0);
   const users=JSON.parse(await readFile(join(root,'users.json'),'utf8'));assert.ok(users.every((u:{hash:string;salt:string})=>/^[a-f0-9]{128}$/.test(u.hash)&&/^[a-f0-9]{32}$/.test(u.salt)));assert.ok(!JSON.stringify(users).includes(password));
   const token=session.signSession(a);assert.deepEqual(await session.userFromToken(token),a);assert.equal(session.verifySession((token[0]==='A'?'B':'A')+token.slice(1)),null);
+  assert.equal(session.sameOrigin(new Request('http://localhost:3114/api/auth/login',{headers:{host:'127.0.0.1:3114',origin:'http://127.0.0.1:3114'}})),true);
+  assert.equal(session.sameOrigin(new Request('http://localhost:3114/api/auth/login',{headers:{host:'127.0.0.1:3114',origin:'https://example.invalid'}})),false);
   assert.equal(store.validCredentials('../user',password),false);
  }finally{assert.ok(root.startsWith(base+sep));await rm(root,{recursive:true,force:true});}
 });
