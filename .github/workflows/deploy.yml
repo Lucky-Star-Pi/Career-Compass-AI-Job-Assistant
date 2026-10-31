@@ -1,0 +1,43 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-main
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy app source to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          source: "app"
+          target: "/opt/career"
+          overwrite: true
+
+      - name: Build and restart
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          command_timeout: 10m
+          script: |
+            set -e
+            export PATH=/usr/local/node-v20.20.2-linux-x64/bin:$PATH
+            cd /opt/career/app
+            npm ci --no-audit --no-fund
+            npm run build
+            pm2 restart career --update-env
+            sleep 3
+            curl -fsS http://127.0.0.1:3000/api/health
