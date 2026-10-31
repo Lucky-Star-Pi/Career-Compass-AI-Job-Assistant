@@ -93,3 +93,7 @@ GitHub:443直连push在本次执行环境多次失败，包含参赛者报告网
 | TIMELOG.csv | P0-3 | 2026-10-31T11:43:18+08:00 | 本材料提交（Git历史定位） | ff3e34796658e0e27d8ac5cec67101ea13730ca60a0067393990fbfa453a4251 | verification-note |
 
 以上为提交材料/验收索引，不是协作原始记录。本轮未读取、复制或修改native原件，四份原件仍未随仓库交付；脱敏副本也未制作。阶段窗口仅记录在TIMELOG备注，未观测时长未补造。
+
+## 第四轮阶段A
+
+f94ed61：账号与隔离存储。实际输出19测试全绿、build exit0，check_accounts.py的匿名401/demo登录/双账号隔离/跨会话/重启持久化/退出全部PASS。已push，等待90秒线上匿名me401、首页跳login、demo登录与账号读取200。用户数据仅在应用目录外；本次只有合成测试数据，未读或改native。验收摘要export_method=verification-note，不冒充原文。
