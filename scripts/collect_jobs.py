@@ -315,12 +315,16 @@ def run_main():
     p.add_argument('--limit', type=int, default=30)
     p.add_argument('--delay', type=float, default=1.5)
     p.add_argument('--dry-run', action='store_true')
+    p.add_argument('--compare-auth', metavar='JOB_URL', help='at most two same-job requests, anonymous then local private session')
     args = p.parse_args()
     if not 1 <= args.limit <= 150 or not 1.5 <= args.delay <= 60 or (args.dry_run and args.limit > 3):
         p.error('limit must be 1..150 (dry-run <=3); delay must be 1.5..60')
     contact = os.environ.get('CAREER_COMPASS_CONTACT', '')
     if not re.fullmatch(r'[A-Za-z0-9.!#$%&\x27*+/=?^_`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}', contact):
         p.error('configure local CAREER_COMPASS_CONTACT with public role address; value is never logged')
+    if args.compare_auth:
+        from compare_auth import run_compare
+        return run_compare(args.compare_auth, contact)
     from batch_jobs import run_batch
     return run_batch(args, contact)
 
