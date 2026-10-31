@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {filterJobs,deadlineLabel,type ListingJob,type Filters} from './job-list.ts';
+const jobs:ListingJob[]=JSON.parse(readFileSync(new URL('./jobs.json',import.meta.url),'utf8'));
+const filters:Filters={query:'',education:[],recruitment:[],locations:[],sort:'deadline'};
+test('无筛选保留10条，搜索覆盖岗位/单位/地点',()=>{assert.equal(filterJobs(jobs,filters).length,10);const found=filterJobs(jobs,{...filters,query:'申能'});assert.ok(found.length>0&&found.every(j=>[j.name,j.employer,j.location].some(v=>v.includes('申能'))));assert.ok(filterJobs(jobs,{...filters,query:'湛江'}).some(j=>j.id.endsWith('-01')));});
+test('硕士筛选只保留03和05，同类多选为OR',()=>{assert.deepEqual(filterJobs(jobs,{...filters,education:['硕士']}).map(j=>j.id.slice(-2)),['03','05']);assert.equal(filterJobs(jobs,{...filters,education:['本科','硕士']}).length,10);});
+test('跨类筛选为AND且筛选/排序不修改源数组',()=>{const before=JSON.stringify(jobs);const found=filterJobs(jobs,{...filters,education:['硕士'],recruitment:['校招'],locations:[jobs[2].location]});assert.ok(found.length>0&&found.every(j=>j.location===jobs[2].location));assert.equal(JSON.stringify(jobs),before);});
+test('具体截止最先、长期其次、未载明最后，不伪造日期',()=>{const base=jobs[0];const sample=[{...base,id:'missing',application_end:'unknown',open_basis:'unknown'},{...base,id:'long',application_end:'unknown',open_basis:'长期招聘'},{...base,id:'date',application_end:{normalized:'2027-01-25'}}];assert.deepEqual(filterJobs(sample,filters).map(j=>j.id),['date','long','missing']);assert.equal(deadlineLabel(sample[1]),'长期招聘，无固定截止日期');assert.equal(deadlineLabel(sample[0]),'公告未载明');});

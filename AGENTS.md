@@ -1,5 +1,7 @@
 # 执行约定
 
+- 第六轮覆盖第四轮页面布局与根页面登录门禁：公开SSR岗位列表优先，AI以右下角悬浮面板提供；只在助手内要求登录。保留既有账号存储、槽位确认和私有简历逻辑，不改match.ts、不新增依赖。本轮单提交feat: job list first with floating assistant，push后等90秒以HTTP核验公开首页。
+
 - 第四轮A/B/C追加授权覆盖此前阶段限制：允许账号及用户隔离、对话优先界面、枚举槽位确认和私有简历文本；不改match.ts，不新增npm依赖。用户数据仅在应用目录之外USER_DATA_DIR（默认/opt/career-data），不得进入Git/日志。A、B、C分别提交推送后等待90秒核验，不手工改服务器应用文件。公开demo为共享体验账号，真实密码和简历不写仓库；固定体验凭据按用户要求公开展示。
 
 - 当前夜间A→D授权覆盖此前阶段限制：修复数据后允许导入10条；整理文档；建立Next.js 15/React/Tailwind与已批准的react-dom、TypeScript、@types配套骨架。禁止部署、交互push与额外业务依赖；完成即停。主文档在docs/，历史报告在docs/reports/；证据路径保持data/raw不动。

@@ -105,3 +105,7 @@ B提交82549fd，浏览器发现Origin校验误拒后以9203f05修正；19测试
 ## 第四轮C验收收尾
 
 C：a7ee54d、fb62a48、25816de；24测试、类型、构建、真实模型3场景与本机浏览器确认/追问/合成简历/删除通过，详见docs/reports/R4_REPORT.md。B线上在12:59:21+08:00确认更新后才准备独立push C。第二会话隔离用独立Cookie客户端验证，不伪称第二浏览器GUI实测。原文、密码、Cookie未写入验收材料；不改native；export_method=verification-note。本节提交自身由Git历史定位，线上C结果以随后真实工具输出为准。
+
+## 第六轮公开列表与悬浮助手
+
+C在途已由402b399保存并push，本轮起点干净。R6本地实际结果见docs/reports/R6_REPORT.md；报告SHA256=262149333c5c769e015dfb48663c4e6d64ae8b37600291afb9aa0df754435bfa；记录时间=2026-10-31T13:18:43+08:00；export_method=verification-note；关联本轮唯一提交feat: job list first with floating assistant（自身SHA由Git历史定位）。未修改native、账户文件或规则，未新增依赖；本轮不包含真实简历/密码，不将降级当模型成功。线上发布结果以随后90秒核验的实际工具输出为准。

@@ -11,3 +11,5 @@
 
 验证入口：npm test、npm run build、python scripts/check_accounts.py。check_slots.py --live会执行最多3次真实模型请求（各最多重试一次），仅使用合成资料。旧smoke.py/check_chat.py为此前未登录阶段的历史验收脚本，不作为当前账号流程入口。
 单测使用本机Node24的内置TypeScript剥离；服务器Node20运行Next构建产物。没有新增npm依赖。
+
+第六轮：根页面公开SSR显示10条列表，前端筛选与排序；右下角面板承载原有对话/槽位/简历操作。收起时保持组件挂载，未登录只展示登录入口，不显示个人判定。登录但条件未确认时，三项徽章显示破折号而非虚构数值；确认后复用summarize显示实际计数。

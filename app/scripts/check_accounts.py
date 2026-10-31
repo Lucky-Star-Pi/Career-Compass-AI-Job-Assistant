@@ -59,8 +59,8 @@ def main():
         for path, body in [('/api/me', None), ('/api/profile', None), ('/api/chat', {'question': '测试问题'})]:
             assert call(anonymous, path, body)[0] == 401, path
         status, _, page = call(anonymous, '/')
-        assert status == 200 and '使用体验账号进入'.encode() in page
-        print('PASS anonymous: / redirects to login; me/profile/chat HTTP 401', flush=True)
+        assert status == 200 and page.count(b'data-job-id=') == 10
+        print('PASS anonymous: / HTTP 200 with 10 server-rendered cards; me/profile/chat HTTP 401', flush=True)
         demo = client()
         assert call(demo, '/api/auth/login', {'username': 'demo', 'password': 'demo2026'})[0] == 200
         assert call(demo, '/api/me')[2]['user']['username'] == 'demo'
