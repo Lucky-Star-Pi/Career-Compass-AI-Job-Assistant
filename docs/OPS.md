@@ -10,6 +10,33 @@ push → GitHub → 服务器每分钟执行git fetch → 有变化则rsync到�
 
 应用与文档修改都从仓库提交、push，不手动改服务器文件。唯一配置例外是参赛者本人维护/opt/career/app/.env.local。push失败不会触发新版本；不要将本地提交直接标为线上版本。发布后等待至少90秒，核对站点、/api/health与本轮修改的实际页面文案，再登记对应推送SHA；服务端HEAD未直接读取时明确其证明范围。
 
+### 首次部署最小启动命令（由参赛者在服务器执行）
+
+以下是可核对的首次启动示例，非本轮已执行记录。前提是服务器已安装 Git、Node 20.19+、npm、pm2、rsync，并由参赛者配置安全组、目录权限与密钥；不在本机照抄 `/opt` 路径。
+
+```sh
+git clone --branch main https://github.com/Lucky-Star-Pi/Career-Compass-AI-Job-Assistant.git /opt/career/career-repo
+mkdir -p /opt/career/app /opt/career-data
+rsync -a --exclude node_modules --exclude .next --exclude .env.local /opt/career/career-repo/app/ /opt/career/app/
+cd /opt/career/app
+# 先由参赛者在 .env.local 配置变量，再构建；勿将变量值贴入日志。
+chmod 600 .env.local
+npm ci
+npm run build
+pm2 start node_modules/next/dist/bin/next --name career -- start -p 3000
+pm2 save
+pm2 startup
+curl -s http://127.0.0.1:3000/api/health
+```
+
+`pm2 startup` 会输出需参赛者执行的系统服务命令；按本机用户和环境核对后执行。`.env.local` 保存 DEEPSEEK_API_KEY、PROFILE_COOKIE_SECRET，可选 DASHSCOPE_API_KEY、USER_DATA_DIR；USER_DATA_DIR 必须在应用目录外。本轮不读取或修改该文件。
+
+现网已有 `/opt/career/deploy.sh` 与 cron；按参赛者核验的链路，每分钟 fetch，有变化才 rsync/build/restart，保留 `.env.local`。可用 `crontab -l`、`pm2 list`、`tail -n 50 /var/log/career-deploy.log` 核对；执行前确认输出不含密钥或用户资料。现网脚本和 crontab 原件未从服务器导出到本仓库，上述命令是首次启动示例，不能冒充现网配置原件或完整自动部署脚本。示意 cron 入口为：
+
+```text
+* * * * * /opt/career/deploy.sh >> /var/log/career-deploy.log 2>&1
+```
+
 ## 3. 关键路径
 
 | 用途 | 路径 |
