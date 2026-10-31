@@ -59,3 +59,11 @@ MODEL-CHANGE (2026-10-30): agent-records/raw/native/20261030-192543-MODEL-CHANGE
 ## 夜间 A→D 验收索引
 
 A：53939a2；B：f56c971；C：0cad7c5；D：本节所在提交（由Git历史定位，避免自身SHA循环）。报告OVERNIGHT_STATUS.md与data/IMPORT_REPORT.md为验收说明，export_method=verification-note，不是原始记录。未读取、复制、改写native，未补造聊天原文；本轮原始导出仍需人工按DELIVERY_PLAN交付，缺口不以本节摘要替代。10份证据SHA256列于OVERNIGHT_STATUS，关联raw/processed/app只读副本可复核。迁移后的历史报告路径已同步。
+
+## 2026-10-31 Chat截断修复
+
+| 文件 | 任务 | 验收记录时间 | 关联提交 | SHA256 | export_method |
+|---|---|---|---|---|---|
+| docs/reports/CHAT_TRUNCATION_FIX.md | CHAT-TRUNCATION | 2026-10-31T09:48:16+08:00 | 6d1bbf9 | 5dfbb22dedf1f46363aa397bae02bc56931c29748914c550e288508a72d8f3ce | verification-note |
+
+实测17项测试全绿、中文路径构建通过、真实接口连续3次connected=true。受限环境首次降级也已在报告披露。未读取/复制/改写native，本节不替代原始协作记录；原件交付仍按DELIVERY_PLAN执行。本次验收记录收尾提交自身由Git历史定位。
