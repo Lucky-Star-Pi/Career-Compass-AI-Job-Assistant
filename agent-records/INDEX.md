@@ -124,3 +124,7 @@ C在途已由402b399保存并push，本轮起点干净。R6本地实际结果见
 ## 回答校验误杀修复
 
 记录时间：2026-10-31T14:35:02+08:00；任务REPLY-GUARD；文件docs/reports/REPLY_GUARD_REPORT.md；SHA256=ed95a2d258fb9cebfb1bd5b293b229112814b7e51cd2cf2aa715f75209dc3986；export_method=verification-note；关联本轮fix提交（自身SHA由Git历史定位）。36测试/build/类型/10条数据校验通过，三条真实DeepSeek请求和错误Key转rules通过；首次问题3仍降级已如实记载。原件未读取或修改；此材料不是原始对话导出，线上验收以后续90秒工具结果为准。
+
+## 模型结构化事实修复
+
+记录时间：2026-10-31T14:52:23+08:00；任务MODEL-EVIDENCE；文件docs/reports/MODEL_EVIDENCE_REPORT.md；SHA256=bc3ea96366113003f3bd5188d21d7522858bceafdde01eb80d04098918f9a389；export_method=verification-note；关联本轮fix提交（自身SHA由Git历史定位）。38测试/build/类型/10条数据校验通过；三问真实DeepSeek正确给出01湛江和03硕士，已记录初次降级及提示词调整。原件未读取/修改，记录不冒充原始协作导出；线上实际结果见后续90秒工具输出。
