@@ -4,12 +4,13 @@ import {mkdir,readFile,writeFile,rename,unlink} from 'node:fs/promises';
 import {resolve,join,sep} from 'node:path';
 import type {Profile} from './match.ts';
 import type {Reference} from './chat-output.ts';
+import type {Mode} from './model-tiers.ts';
 
 const scrypt=promisify(scryptCallback);
 export type PublicUser={userId:string;username:string};
 type User=PublicUser & {salt:string;hash:string;createdAt:string};
-export type Message={id:string;role:'user'|'assistant';content:string;createdAt:string;references?:Reference[];model_status?:string;profile_updates?:Partial<Profile>;resume_received?:boolean};
-export type UserData={profile:Profile;resume:string|null;messages:Message[];updatedAt:string};
+export type Message={id:string;role:'user'|'assistant';content:string;createdAt:string;references?:Reference[];model_status?:string;mode?:Mode;profile_updates?:Partial<Profile>;resume_received?:boolean;profile_autofilled?:boolean};
+export type UserData={profile:Profile;resume:string|null;messages:Message[];updatedAt:string;preferences?:{bubbleDismissed:boolean};profileSource?:'resume'|'manual'};
 const root=resolve(process.env.USER_DATA_DIR||'/opt/career-data');
 const appRoot=resolve(process.cwd());
 if(root===appRoot||root.startsWith(appRoot+sep))throw new Error('USER_DATA_DIR must be outside the application directory');
@@ -44,4 +45,4 @@ function profilePath(userId:string){if(!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f
 async function load(userId:string):Promise<UserData>{try{return await json<UserData>(profilePath(userId));}catch(e){if((e as NodeJS.ErrnoException).code!=='ENOENT')throw e;return {profile:{confirmed:false,certificates:[]},resume:null,messages:[],updatedAt:new Date().toISOString()};}}
 export async function getData(userId:string){await initialize();return load(userId);}
 export async function updateData(userId:string,change:(data:UserData)=>void){return locked(async()=>{await init();const data=await load(userId);change(data);data.messages=data.messages.slice(-20);data.updatedAt=new Date().toISOString();await atomic(profilePath(userId),data);return data;});}
-export function appendTurn(userId:string,question:string,answer:{reply:string;references:Reference[];model_status:string;profile_updates?:Partial<Profile>;resume_received?:boolean},options?:{resume?:string;redactQuestion?:boolean}){return updateData(userId,data=>{const now=new Date().toISOString();if(options?.resume!==undefined)data.resume=options.resume;data.messages.push({id:randomUUID(),role:'user',content:options?.resume!==undefined||options?.redactQuestion?'已提交简历要点（原文仅保存在账号私有简历中）':question,createdAt:now},{id:randomUUID(),role:'assistant',content:answer.reply,createdAt:now,references:answer.references,model_status:answer.model_status,profile_updates:answer.profile_updates,resume_received:answer.resume_received});});}
+export function appendTurn(userId:string,question:string,answer:{reply:string;references:Reference[];model_status:string;mode?:Mode;profile_updates?:Partial<Profile>;resume_received?:boolean;profile_autofilled?:boolean},options?:{resume?:string;redactQuestion?:boolean}){return updateData(userId,data=>{const now=new Date().toISOString();if(options?.resume!==undefined)data.resume=options.resume;data.messages.push({id:randomUUID(),role:'user',content:options?.resume!==undefined||options?.redactQuestion?'已提交简历要点（原文仅保存在账号私有简历中）':question,createdAt:now},{id:randomUUID(),role:'assistant',content:answer.reply,createdAt:now,references:answer.references,model_status:answer.model_status,mode:answer.mode,profile_updates:answer.profile_updates,resume_received:answer.resume_received,profile_autofilled:answer.profile_autofilled});});}

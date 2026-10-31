@@ -116,3 +116,7 @@ C在途已由402b399保存并push，本轮起点干净。R6本地实际结果见
 
 - docs/SUBMISSION.md SHA256=17ee40af795c4d41bf6ff0c93bdeb8addcbdae652466e86c62ba76001e765ab1
 - README.md SHA256=2448f047443699e3ba3887ee5bc1764d49f17be5aa31a48534559a3b67824ed2
+
+## 第七轮小职验收
+
+记录时间：2026-10-31T14:16:52+08:00；任务R7-XIAOZHI；文件docs/reports/R7_REPORT.md；SHA256=9d0d73a47a57eb4d65851a86b822038d3f1a9ac416718f67906923ac9d0af18f；export_method=verification-note；关联本轮功能提交（自身SHA由Git历史定位）。构建、35测试、账号/数据回归、错误Key转规则及浏览器合成PDF/气泡验收通过；Qwen成功层仅模拟验证，未称真实调用。原始native未读取或变更，截图/合成运行数据仅本地忽略区；本段不替代原始协作记录。

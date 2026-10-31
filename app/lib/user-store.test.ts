@@ -13,6 +13,7 @@ test('账号持久化、并发注册、用户隔离、20条历史及会话防篡
   const duplicates=await Promise.all([store.register('duplicate',password),store.register('duplicate',password)]);assert.equal(duplicates.filter(Boolean).length,1);
   assert.equal(await store.authenticate('testA',randomBytes(20).toString('hex')),null);
   await store.updateData(a.userId,data=>{data.profile={confirmed:true,education:'本科'};});assert.equal((await store.getData(b.userId)).profile.confirmed,false);
+  await store.updateData(a.userId,data=>{data.preferences={bubbleDismissed:true};data.profileSource='resume';});assert.equal((await store.getData(a.userId)).preferences?.bubbleDismissed,true);assert.equal((await store.getData(b.userId)).preferences,undefined);
   await Promise.all(Array.from({length:12},(_,i)=>store.appendTurn(a.userId,'合成问题'+i,{reply:'合成回答',references:[],model_status:'测试桩'})));
   assert.equal((await store.getData(a.userId)).messages.length,20);assert.equal((await store.getData(b.userId)).messages.length,0);
   const users=JSON.parse(await readFile(join(root,'users.json'),'utf8'));assert.ok(users.every((u:{hash:string;salt:string})=>/^[a-f0-9]{128}$/.test(u.hash)&&/^[a-f0-9]{32}$/.test(u.salt)));assert.ok(!JSON.stringify(users).includes(password));

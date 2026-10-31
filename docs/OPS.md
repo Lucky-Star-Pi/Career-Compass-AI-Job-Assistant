@@ -2,7 +2,7 @@
 
 ## 1. 实际架构
 
-腾讯云 ECS，TencentOS 4、2C4G，Node 20 + pm2 + cron，Next.js 应用监听3000端口。入口为 http://118.89.79.239:3000，无需登录。以上环境及线上健康检查结果来自参赛者2026-10-31状态同步；早期Vercel/Neon选型记录不代表当前实际部署，当前数据为只读JSON。
+腾讯云 ECS，TencentOS 4、2C4G，Node 20 + pm2 + cron，Next.js 应用监听3000端口。入口为 http://118.89.79.239:3000，列表免登录，助手需登录。以上环境及线上健康检查结果来自参赛者2026-10-31状态同步；早期Vercel/Neon选型记录不代表当前实际部署，当前数据为只读JSON。
 
 ## 2. 自动部署链路
 
@@ -35,8 +35,10 @@ cron每分钟巡检仓库版本并触发部署，不等同于独立HTTP健康探
 
 ## 6. 密钥与发布核验
 
-/opt/career/app/.env.local仅存DEEPSEEK_API_KEY和PROFILE_COOKIE_SECRET，权限600，不进入Git或Docker构建上下文。配置由参赛者本人负责，本文不读取、展示或复制密钥；稳定Cookie签名密钥用于重启后的画像一致性。
+/opt/career/app/.env.local保存DEEPSEEK_API_KEY和PROFILE_COOKIE_SECRET，可选DASHSCOPE_API_KEY启用Qwen备份，权限600，不进入Git或Docker构建上下文。配置由参赛者本人负责，本文不读取、展示或复制密钥；稳定Cookie签名密钥用于重启后的画像一致性。
 
 参赛者已报告线上/api/health的data_count=10、persistent_cookie_secret=true，以及一次connected=true、约1.4秒的对话实测。该事实与本轮发布是否成功分开登记；本轮GitHub连接失败时继续使用先前线上版本，不能依据既有健康结果宣称新提交已上线。
 
 第四轮账号存储：默认/opt/career-data（可用USER_DATA_DIR指定应用目录外路径），users.json仅保存scrypt盐和哈希，profiles/<userId>.json保存该账号画像、私有简历与最近20条消息。运行时自动建目录，文件模式600、目录700；单进程写锁与临时文件rename用于原子替换。该目录不在rsync应用路径内；不要把它拷入源码或部署日志。公开demo为共享体验账号。
+
+第七轮：PDF仅浏览器动态载入pdfjs-dist legacy构建，在同一线程提取文字；不上传文件、不做OCR。pdfjs-dist@5.6.205的Node引擎声明为20.19+/22.13+/24，本机Node24构建通过；服务器Node20的具体小版本未在本轮读取，若npm提示EBADENGINE由参赛者核对版本，不擅自升级服务器。偏好与画像来源标记随账号文件原子保存，不放在应用目录。

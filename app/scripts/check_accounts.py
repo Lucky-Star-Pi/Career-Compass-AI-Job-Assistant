@@ -17,7 +17,7 @@ def main():
     private.mkdir(parents=True, exist_ok=True)
     data_dir = Path(tempfile.mkdtemp(prefix='r4-http-', dir=private))
     env = os.environ.copy()
-    env.update(USER_DATA_DIR=str(data_dir), DEEPSEEK_API_KEY='',
+    env.update(USER_DATA_DIR=str(data_dir), DEEPSEEK_API_KEY='', DASHSCOPE_API_KEY='',
                PROFILE_COOKIE_SECRET=secrets.token_hex(32), NEXT_TELEMETRY_DISABLED='1')
     base = 'http://127.0.0.1:3113'
     def client():
