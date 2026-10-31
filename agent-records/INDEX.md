@@ -109,3 +109,10 @@ C：a7ee54d、fb62a48、25816de；24测试、类型、构建、真实模型3场�
 ## 第六轮公开列表与悬浮助手
 
 C在途已由402b399保存并push，本轮起点干净。R6本地实际结果见docs/reports/R6_REPORT.md；报告SHA256=262149333c5c769e015dfb48663c4e6d64ae8b37600291afb9aa0df754435bfa；记录时间=2026-10-31T13:18:43+08:00；export_method=verification-note；关联本轮唯一提交feat: job list first with floating assistant（自身SHA由Git历史定位）。未修改native、账户文件或规则，未新增依赖；本轮不包含真实简历/密码，不将降级当模型成功。线上发布结果以随后90秒核验的实际工具输出为准。
+
+## 提交文档与现状对齐
+
+记录时间：2026-10-31T13:35:17+08:00；任务SUBMISSION-SYNC；本任务提交docs: align submission with login, resume and deployment reality由Git历史定位。只修改说明和真实耗时索引，应用功能基线仍为a6a9854；16:00为参赛者指定统计口径，09–16分段自报未逐段计时，不伪造工具观测。指定grep无命中，六节/六条可信机制及链接检查通过；export_method=verification-note，不替代原文。
+
+- docs/SUBMISSION.md SHA256=17ee40af795c4d41bf6ff0c93bdeb8addcbdae652466e86c62ba76001e765ab1
+- README.md SHA256=2448f047443699e3ba3887ee5bc1764d49f17be5aa31a48534559a3b67824ed2
