@@ -67,3 +67,14 @@ A：53939a2；B：f56c971；C：0cad7c5；D：本节所在提交（由Git历史�
 | docs/reports/CHAT_TRUNCATION_FIX.md | CHAT-TRUNCATION | 2026-10-31T09:48:16+08:00 | 6d1bbf9 | 5dfbb22dedf1f46363aa397bae02bc56931c29748914c550e288508a72d8f3ce | verification-note |
 
 实测17项测试全绿、中文路径构建通过、真实接口连续3次connected=true。受限环境首次降级也已在报告披露。未读取/复制/改写native，本节不替代原始协作记录；原件交付仍按DELIVERY_PLAN执行。本次验收记录收尾提交自身由Git历史定位。
+
+## 2026-10-31 容器构建配置
+
+仅新增容器配置、修改start及同步本地启动说明；未构建镜像、部署或push。以下为文件校验索引，非协作原文；本次提交由Git历史中chore: add container build for domestic hosting定位，自身SHA不循环回填。
+
+| 文件 | 任务 | 时间 | 关联提交 | SHA256 | export_method |
+|---|---|---|---|---|---|
+| app/Dockerfile | CONTAINER-BUILD | 2026-10-31T10:01:08+08:00 | 本条所在提交 | 44c857ee70bbb8ea02b0c52b2334ed5a50c77dc1f6b16d49d15eb6c90a4325c2 | verification-note |
+| app/.dockerignore | CONTAINER-BUILD | 2026-10-31T10:01:08+08:00 | 本条所在提交 | e96ac69d8a19bf70ae4e0dc3a8744c66110f2a919cccead594f8240a79950e82 | verification-note |
+| app/package.json | CONTAINER-BUILD | 2026-10-31T10:01:08+08:00 | 本条所在提交 | dd8c73335fca777c11f0660231a60943830041fafabd065b5c63e87ee40abb81 | verification-note |
+| app/README.md | CONTAINER-BUILD | 2026-10-31T10:01:08+08:00 | 本条所在提交 | afb8fae548b5939e6101379cbfdc53230b0c224fbdb172605fdabb2d73abf9c4 | verification-note |
